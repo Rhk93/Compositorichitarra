@@ -35,9 +35,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 .chips{display:flex;gap:6px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid var(--ln);border-radius:999px;padding:6px 13px;font-size:.78em;font-weight:600;background:var(--card);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.chip.act{box-shadow:0 0 0 2px var(--pc)}
+.chips{touch-action:pan-x;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.chip small{font-weight:500;color:var(--mu);font-size:.88em}.chip .cs{display:none}
+[data-bar=v] #chips{touch-action:pan-y;position:fixed;right:6px;top:50%;transform:translateY(-50%);z-index:30;flex-direction:column;flex-wrap:nowrap;gap:5px;padding:6px;max-height:80vh;overflow-y:auto;overscroll-behavior:contain;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--ln);border-radius:18px;overflow:visible;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+[data-bar=v] .chip{flex-direction:column;gap:0;padding:6px 8px;border-radius:12px;width:72px;align-items:center;text-align:center;background:color-mix(in srgb,var(--pc) 22%,var(--card));border:0}
+[data-bar=v] .chip i{display:none}[data-bar=v] .chip .cl{display:none}[data-bar=v] .chip .cs{display:block;font-size:.95em}[data-bar=v] .chip small{font-size:.72em;white-space:normal;line-height:1.1}
+[data-bar=v] main{padding-right:92px}
 .chip i{width:8px;height:8px;border-radius:50%;background:var(--pc)}
 main{padding:4px 16px 40px;max-width:1100px;margin:0 auto}
-.per{margin-top:16px;padding:18px 14px 16px;border-radius:var(--r2);background:color-mix(in srgb,var(--pc) 10%,var(--bg));border:1px solid color-mix(in srgb,var(--pc) 18%,transparent)}
+.per{scroll-margin-top:var(--hh,190px);margin-top:16px;padding:18px 14px 16px;border-radius:var(--r2);background:color-mix(in srgb,var(--pc) 10%,var(--bg));border:1px solid color-mix(in srgb,var(--pc) 18%,transparent)}
 .per h2{margin:0;font-size:1.6em;font-weight:800;letter-spacing:-.03em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .per h2:before{content:"";width:6px;height:.9em;border-radius:3px;background:var(--pc);align-self:center}
 .yr{font-size:.6em;color:var(--pc);font-weight:700;letter-spacing:0}
@@ -202,6 +209,7 @@ input[type=range]{width:100%;accent-color:var(--ac)}
  <div style="display:none"><h4>Sfondo dei riquadri</h4><div class="opts"><button class="op" id="bgdef">🎨 Colore del periodo</button><label class="op">📷 Scegli una mia foto<input type="file" accept="image/*" id="bgin" hidden></label></div>
  <div id="bgprev"></div></div>
  <h4>Esporta</h4><div class="opts"><button class="op" id="exb">📋 Esporta i nomi di tutti gli autori</button></div>
+ <h4>Barra dei periodi</h4><div class="opts" id="oB"></div>
  <h4>Stile delle anteprime</h4><div class="opts" id="oC"></div>
  <h4>Dimensione anteprime</h4><div class="opts" id="oZ"></div>
  <h4>Carattere</h4><div class="opts" id="oF"></div>
@@ -662,8 +670,9 @@ function render(){
   L.map(c=>`<button class="bk" data-i="${C.indexOf(c)}" style="--pc:${PM[c[3]][3]}"><div class="cv">${frameCover(c,getF(c[0]))}</div></button>`).join("")+`</div></section>`});
  $("#tl").innerHTML=out||`<p class="empty">Nessun risultato</p>`;
 }
-$("#chips").innerHTML=P.map(p=>`<button class="chip" style="--pc:${p[3]}" data-p="${p[0]}"><i></i>${p[1]}</button>`).join("");
-$("#chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;$("#q").value="";render();const s=$("#p-"+b.dataset.p);if(s)window.scrollTo({top:s.offsetTop-$("header").offsetHeight-6,behavior:"smooth"})};
+const SH={ori:"Medioevo",rin:"Rinasc.",bar:"Barocco",cla:"Classic.",rom:"Romant.",nov:"Novec.",con:"Oggi"};
+$("#chips").innerHTML=P.map(p=>`<button class="chip" style="--pc:${p[3]}" data-p="${p[0]}"><i></i><span class="cl">${p[1]}</span><span class="cs">${SH[p[0]]}</span><small>${p[2].replace("Antichità","Antich.")}</small></button>`).join("");
+$("#chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;if($("#q").value){$("#q").value="";render()}const s=$("#p-"+b.dataset.p);if(!s)return;document.documentElement.style.setProperty("--hh",(S.b=="v"?$("header").offsetHeight:$("header").offsetHeight)+8+"px");document.querySelectorAll("#chips .chip").forEach(x=>x.classList.toggle("act",x==b));try{s.scrollIntoView({behavior:"smooth",block:"start"})}catch(_){s.scrollIntoView(true)}b.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"})};
 $("#q").oninput=render;
 $("#tl").onclick=e=>{const b=e.target.closest(".bk");if(b)openBook(C[+b.dataset.i])};
 function openBook(c){
@@ -712,7 +721,8 @@ let S={t:"apple",f:"apple",s:17,c:"pastello",z:"s",v:3};
 try{Object.assign(S,JSON.parse(localStorage.getItem("chit-set")||"{}"))}catch(e){}
 const CS={pastello:"🎨 Pastello",minimal:"➖ Minimal"};
 const ZS={s:"Piccole",m:"Medie",l:"Grandi"};
-function apply(){if(!CS[S.c])S.c="pastello";if(!S.v||S.v<2){S.f="apple"}if(!S.v||S.v<3){S.z="s";S.v=3}if(!ZS[S.z])S.z="s";document.documentElement.dataset.c=S.c;document.documentElement.dataset.z=S.z;$("#oC").innerHTML=Object.entries(CS).map(([k,v])=>`<button class="op${k==S.c?" sel":""}" data-k="${k}">${v}</button>`).join("");$("#oZ").innerHTML=Object.entries(ZS).map(([k,v])=>`<button class="op${k==S.z?" sel":""}" data-k="${k}">${v}</button>`).join("");if(!T[S.t])S.t="apple";if(!F[S.f])S.f="apple";
+const BS={h:"↔️ Orizzontale in alto",v:"↕️ Verticale a destra"};
+function apply(){if(!CS[S.c])S.c="pastello";if(!S.v||S.v<2){S.f="apple"}if(!S.v||S.v<3){S.z="s";S.v=3}if(!ZS[S.z])S.z="s";if(!BS[S.b])S.b="h";document.documentElement.dataset.bar=S.b;{const ch=$("#chips");if(S.b=="v"){if(ch.parentNode!==document.body)document.body.appendChild(ch)}else if(ch.parentNode!==$("header"))$("header").appendChild(ch)}$("#oB").innerHTML=Object.entries(BS).map(([k,v])=>`<button class="op${k==S.b?" sel":""}" data-k="${k}">${v}</button>`).join("");document.documentElement.dataset.c=S.c;document.documentElement.dataset.z=S.z;$("#oC").innerHTML=Object.entries(CS).map(([k,v])=>`<button class="op${k==S.c?" sel":""}" data-k="${k}">${v}</button>`).join("");$("#oZ").innerHTML=Object.entries(ZS).map(([k,v])=>`<button class="op${k==S.z?" sel":""}" data-k="${k}">${v}</button>`).join("");if(!T[S.t])S.t="apple";if(!F[S.f])S.f="apple";
  document.documentElement.dataset.t=S.t;
  document.documentElement.style.setProperty("--ff",F[S.f][1]);
  document.documentElement.style.setProperty("--fs",S.s+"px");
@@ -722,6 +732,7 @@ function apply(){if(!CS[S.c])S.c="pastello";if(!S.v||S.v<2){S.f="apple"}if(!S.v|
  try{localStorage.setItem("chit-set",JSON.stringify(S))}catch(e){}
 }
 $("#oT").onclick=e=>{const b=e.target.closest(".op");if(b){S.t=b.dataset.k;apply()}};
+$("#oB").onclick=e=>{const b=e.target.closest(".op");if(b){S.b=b.dataset.k;apply()}};
 $("#oC").onclick=e=>{const b=e.target.closest(".op");if(b){S.c=b.dataset.k;apply()}};
 $("#oZ").onclick=e=>{const b=e.target.closest(".op");if(b){S.z=b.dataset.k;apply()}};
 $("#oF").onclick=e=>{const b=e.target.closest(".op");if(b){S.f=b.dataset.k;apply()}};
