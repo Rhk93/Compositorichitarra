@@ -35,8 +35,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .chips{display:flex;gap:6px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid var(--ln);border-radius:999px;padding:6px 13px;font-size:.78em;font-weight:600;background:var(--card);white-space:nowrap;display:flex;align-items:center;gap:6px}
-.chip.act{box-shadow:0 0 0 2px var(--pc)}
-.chips{touch-action:pan-x;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.chip.act{box-shadow:inset 0 0 0 2px var(--pc)}
+.chip{line-height:1.25;overflow:visible}
+.chips{padding:10px 4px 6px!important;margin:0 -4px;touch-action:pan-x;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .chip small{font-weight:500;color:var(--mu);font-size:.88em}.chip .cs{display:none}
 [data-bar=v] #chips{touch-action:pan-y;position:fixed;right:6px;top:50%;transform:translateY(-50%);z-index:30;flex-direction:column;flex-wrap:nowrap;gap:5px;padding:6px;max-height:80vh;overflow-y:auto;overscroll-behavior:contain;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--ln);border-radius:18px;overflow:visible;box-shadow:0 6px 20px rgba(0,0,0,.12)}
 [data-bar=v] .chip{flex-direction:column;gap:0;padding:6px 8px;border-radius:12px;width:72px;align-items:center;text-align:center;background:color-mix(in srgb,var(--pc) 22%,var(--card));border:0}
@@ -717,12 +718,12 @@ const F={windows:["Windows (Segoe UI)",'"Segoe UI Variable","Segoe UI",system-ui
  playfair:["Playfair",'"Playfair Display",Georgia,serif'],
  inter:["Inter",'Inter,Arial,sans-serif'],
  mono:["Monospazio",'ui-monospace,"SF Mono",Menlo,Consolas,monospace']};
-let S={t:"apple",f:"apple",s:17,c:"pastello",z:"s",v:3};
+let S={t:"apple",f:"apple",s:17,c:"pastello",z:"s",b:"v",v:4};
 try{Object.assign(S,JSON.parse(localStorage.getItem("chit-set")||"{}"))}catch(e){}
 const CS={pastello:"🎨 Pastello",minimal:"➖ Minimal"};
 const ZS={s:"Piccole",m:"Medie",l:"Grandi"};
 const BS={h:"↔️ Orizzontale in alto",v:"↕️ Verticale a destra"};
-function apply(){if(!CS[S.c])S.c="pastello";if(!S.v||S.v<2){S.f="apple"}if(!S.v||S.v<3){S.z="s";S.v=3}if(!ZS[S.z])S.z="s";if(!BS[S.b])S.b="h";document.documentElement.dataset.bar=S.b;{const ch=$("#chips");if(S.b=="v"){if(ch.parentNode!==document.body)document.body.appendChild(ch)}else if(ch.parentNode!==$("header"))$("header").appendChild(ch)}$("#oB").innerHTML=Object.entries(BS).map(([k,v])=>`<button class="op${k==S.b?" sel":""}" data-k="${k}">${v}</button>`).join("");document.documentElement.dataset.c=S.c;document.documentElement.dataset.z=S.z;$("#oC").innerHTML=Object.entries(CS).map(([k,v])=>`<button class="op${k==S.c?" sel":""}" data-k="${k}">${v}</button>`).join("");$("#oZ").innerHTML=Object.entries(ZS).map(([k,v])=>`<button class="op${k==S.z?" sel":""}" data-k="${k}">${v}</button>`).join("");if(!T[S.t])S.t="apple";if(!F[S.f])S.f="apple";
+function apply(){if(!CS[S.c])S.c="pastello";if(!S.v||S.v<2){S.f="apple"}if(!S.v||S.v<3){S.z="s"}if(!S.v||S.v<4){S.b="v";S.v=4}if(!ZS[S.z])S.z="s";if(!BS[S.b])S.b="v";document.documentElement.dataset.bar=S.b;{const ch=$("#chips");if(S.b=="v"){if(ch.parentNode!==document.body)document.body.appendChild(ch)}else if(ch.parentNode!==$("header"))$("header").appendChild(ch)}$("#oB").innerHTML=Object.entries(BS).map(([k,v])=>`<button class="op${k==S.b?" sel":""}" data-k="${k}">${v}</button>`).join("");document.documentElement.dataset.c=S.c;document.documentElement.dataset.z=S.z;$("#oC").innerHTML=Object.entries(CS).map(([k,v])=>`<button class="op${k==S.c?" sel":""}" data-k="${k}">${v}</button>`).join("");$("#oZ").innerHTML=Object.entries(ZS).map(([k,v])=>`<button class="op${k==S.z?" sel":""}" data-k="${k}">${v}</button>`).join("");if(!T[S.t])S.t="apple";if(!F[S.f])S.f="apple";
  document.documentElement.dataset.t=S.t;
  document.documentElement.style.setProperty("--ff",F[S.f][1]);
  document.documentElement.style.setProperty("--fs",S.s+"px");
