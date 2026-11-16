@@ -18,14 +18,17 @@
 [data-t=sole]{--bg:#fff8db;--card:#fff;--tx:#3a2f00;--mu:#8a7a3a;--ac:#f29f05;--ln:rgba(140,110,0,.12);--glass:rgba(255,248,219,.85)}
 [data-t=fragola]{--bg:#ffedf2;--card:#fff;--tx:#4a1d2b;--mu:#9a6070;--ac:#e83e6c;--ln:rgba(150,30,60,.1);--glass:rgba(255,237,242,.85)}
 [data-t=lime]{--bg:#f2fbe4;--card:#fff;--tx:#263a10;--mu:#6b8250;--ac:#5fb000;--ln:rgba(60,110,0,.12);--glass:rgba(242,251,228,.85)}
-[data-t=sole] h1,[data-t=fragola] h1,[data-t=lime] h1{color:var(--ac)}
+[data-t=sole] h1,[data-t=fragola] h1,[data-t=lime] h1{color:var(--tc,var(--ac))}
 [data-t=contrasto]{--bg:#000;--card:#000;--tx:#fff;--mu:#ffeb3b;--ac:#ffeb3b;--ln:#fff;--glass:rgba(0,0,0,.9)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--ff);font-size:var(--fs);line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
 header{position:sticky;top:0;z-index:20;background:var(--glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--ln);padding:12px 16px 10px}
 .top{display:flex;align-items:center;gap:8px}
-h1{font-size:1.9em;margin:0;flex:1;line-height:1.05;font-weight:800;letter-spacing:-.03em}
-h1 small{display:block;font-size:.5em;color:var(--mu);font-weight:500;letter-spacing:-.01em;margin-top:4px;line-height:1.25}
+h1{font-size:2.35em;margin:0;flex:1;line-height:1;font-weight:900;letter-spacing:-.04em;color:var(--tc,var(--tx));cursor:pointer}
+h1 small{color:var(--mu)}
+.tbtn{display:flex;flex-direction:column;gap:6px;align-items:stretch;flex:none}.tbtn .ib{display:flex;align-items:center;justify-content:center;padding:6px 10px}
+.aib{display:flex;align-items:center;gap:5px}.aib span{background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+h1 small{display:block;font-size:.42em;font-weight:600!important;color:var(--mu);font-weight:500;letter-spacing:-.01em;margin-top:4px;line-height:1.25}
 button{font:inherit;color:inherit;cursor:pointer}
 .ib{background:var(--card);border:1px solid var(--ln);border-radius:999px;padding:7px 13px;font-size:.85em;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.06)}
 #q{width:100%;margin-top:10px;padding:10px 14px;border-radius:12px;border:0;background:var(--ln);color:var(--tx);font:inherit;font-size:.95em;outline:none}
@@ -52,10 +55,26 @@ main{padding:4px 16px 40px;max-width:1100px;margin:0 auto}
 .cn small{font-size:.68em;opacity:.85}
 .tlt{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;padding:4px 16px;font-size:1.05em;font-weight:800;letter-spacing:-.02em}.tlt i{font-style:normal;font-size:.75em;font-weight:600;color:var(--ac)}
 #tlbox p{margin:8px 16px 10px}
+#vtsel{max-height:65vh;overflow-y:auto}
+.vt{position:relative;padding:4px 0 10px}
+.vt:before{content:"";position:absolute;left:62px;top:0;bottom:0;width:2px;background:var(--ln)}
+.vtp{position:relative;margin:14px 0 6px 50px;padding:7px 12px;border-radius:12px;background:color-mix(in srgb,var(--pc) 32%,var(--card));color:color-mix(in srgb,var(--pc) 75%,var(--tx));font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:.85em}
+.vtrow{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none}.vtrow::-webkit-scrollbar{display:none}
+.vtrow .vtp{flex:none;margin:0!important;width:auto;min-width:120px;flex-direction:column;align-items:flex-start;gap:1px;border:2px solid transparent;cursor:pointer;padding:10px 14px!important}
+.vtrow .vtp b{font-size:.9em;white-space:nowrap}.vtrow .vtp small{font-size:.68em;font-weight:600;opacity:.85;white-space:nowrap}
+.vtrow .vtp.op2{border-color:color-mix(in srgb,var(--pc) 70%,var(--tx));box-shadow:0 4px 12px color-mix(in srgb,var(--pc) 35%,transparent)}
+.vtc{position:relative;margin:6px 0;height:16px}
+.vtc span{position:absolute;left:0;width:52px;text-align:right;font-size:.7em;font-weight:800;color:var(--mu)}
+.vti{position:relative;display:flex;align-items:center;width:100%;background:none;border:0;padding:5px 0;text-align:left}
+.vty{width:52px;flex:none;text-align:right;font-size:.7em;color:var(--mu);font-weight:600;padding-right:4px}
+.vti i{flex:none;width:12px;height:12px;border-radius:50%;background:color-mix(in srgb,var(--pc) 55%,var(--card));border:2px solid var(--card);margin:0 10px 0 1px;box-shadow:0 0 0 1px var(--pc);z-index:1}
+.vtn{flex:1;background:color-mix(in srgb,var(--pc) 20%,var(--card));border-radius:12px;padding:7px 11px}
+.vtn b{display:block;font-size:.85em}.vtn small{font-size:.68em;color:var(--mu)}
+.vti:active .vtn{background:color-mix(in srgb,var(--pc) 32%,var(--card))}
 .tlw{margin-top:18px;background:var(--card);border-radius:20px;border:1px solid var(--ln);padding:10px 0;box-shadow:0 6px 20px rgba(0,0,0,.06)}
 .tlw h3{margin:0 16px 4px;font-size:1.25em;font-weight:800;letter-spacing:-.02em}
 .tlw p{margin:0 16px 10px;font-size:.78em;color:var(--mu)}
-.tls{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px 6px}
+.tls{overflow-x:visible;-webkit-overflow-scrolling:touch;padding:0 16px 6px}
 .tl{position:relative}
 .tlb{position:absolute;top:0;bottom:0;border-left:1px solid var(--ln)}
 .tlb span{position:sticky;display:block;font-size:.66em;font-weight:800;color:#fff;background:var(--pc);padding:3px 8px;border-radius:0 8px 8px 0;white-space:nowrap;width:max-content}
@@ -77,6 +96,39 @@ body.hasbg .art:after{content:"";position:absolute;inset:0;background:linear-gra
 .plq b{font-size:.95em;font-weight:700;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;letter-spacing:-.01em}
 .plq small{font-size:.66em;color:var(--mu);display:flex;align-items:center;gap:5px;margin-top:2px}
 .plq small:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pc);opacity:.7}
+.pn{margin:4px 0 14px;background:var(--card);border:1px solid var(--ln);border-radius:var(--r3);padding:10px 14px;font-size:.88em}
+.pn summary{cursor:pointer;font-weight:700;color:var(--pc);list-style:none}
+.pn summary::-webkit-details-marker{display:none}
+.pn summary:after{content:" ▾";font-size:.8em}
+.pn[open] summary:after{content:" ▴"}
+.pn ul{margin:8px 0 0;padding-left:1.1em}.pn li{margin:5px 0}
+.pxh{margin-top:10px;font-weight:700;font-size:.8em;text-transform:uppercase;letter-spacing:.05em;color:var(--mu)}
+.px li{font-size:.92em}
+.ap{background:color-mix(in srgb,var(--ac) 7%,var(--card))}
+.ap ul{margin:0;padding-left:1.1em}.ap li{margin:6px 0;font-size:.95em}
+.ini{display:none}
+.tx{min-width:0;display:flex;flex-direction:column;justify-content:center}
+[data-z=s] .grid{grid-template-columns:repeat(auto-fill,minmax(118px,1fr))}[data-z=s] .plq{height:62px;padding:8px 10px}[data-z=s] .plq b{font-size:.8em}
+[data-z=l] .grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}[data-z=l] .plq{height:100px;padding:16px 18px}[data-z=l] .plq b{font-size:1.1em}
+[data-c=pastello] .cv{background:color-mix(in srgb,var(--pc,#888) 20%,var(--card));border:0;box-shadow:none}
+[data-c=pastello] .plq,[data-c=colore] .plq,[data-c=contorno] .plq,[data-c=minimal] .plq,[data-c=vetro] .plq,[data-c=iniziali] .plq,[data-c=superiore] .plq,[data-c=neon] .plq{border-left:0}
+[data-c=pastello] .plq{background:color-mix(in srgb,var(--pc) 22%,var(--card))}
+[data-c=colore] .cv{border:0}[data-c=colore] .plq{background:linear-gradient(135deg,var(--pc),color-mix(in srgb,var(--pc) 60%,#000))}[data-c=colore] .plq b{color:#fff}[data-c=colore] .plq small{color:rgba(255,255,255,.85)}[data-c=colore] .plq small:before{background:#fff}
+[data-c=contorno] .cv{box-shadow:none;border:0}[data-c=contorno] .plq{border:2px solid var(--pc);border-radius:var(--r)}[data-c=contorno] .plq b{color:var(--pc)}
+[data-c=minimal] .cv{background:transparent;border:0;box-shadow:none;border-radius:0}[data-c=minimal] .plq{border-bottom:2px solid var(--pc);padding-left:2px}
+[data-c=vetro] .cv{border:1px solid rgba(255,255,255,.6);box-shadow:0 8px 24px color-mix(in srgb,var(--pc) 30%,transparent)}[data-c=vetro] .plq{background:linear-gradient(135deg,color-mix(in srgb,var(--pc) 30%,rgba(255,255,255,.7)),rgba(255,255,255,.35));backdrop-filter:blur(10px)}
+[data-c=superiore] .plq{border-top:6px solid var(--pc)}
+[data-c=iniziali] .grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}[data-c=iniziali] .plq{flex-direction:row;align-items:center;gap:12px;height:68px}[data-c=iniziali] .ini{display:flex;flex:none;width:38px;height:38px;border-radius:50%;background:var(--pc);color:#fff;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:.8em}
+[data-c=neon] .cv{background:#0d0d12;border:0;box-shadow:0 0 0 1px var(--pc),0 0 14px color-mix(in srgb,var(--pc) 60%,transparent)}[data-c=neon] .plq b{color:#fff;text-shadow:0 0 8px var(--pc)}[data-c=neon] .plq small{color:#bbb}
+[data-c=lista] .grid{grid-template-columns:1fr!important;gap:6px}[data-c=lista] .plq{height:auto!important;padding:10px 14px}[data-c=lista] .tx{flex-direction:row;align-items:baseline;justify-content:space-between;gap:8px}
+#tcp{position:fixed;z-index:65;left:12px;right:12px;top:150px;max-width:420px;background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:14px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
+.tch{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tcs{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.tcs button{aspect-ratio:1;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 1px var(--ln);padding:0}
+.tcs button.sel{box-shadow:0 0 0 3px var(--tx)}
+.tcs .auto{background:conic-gradient(var(--tx) 0 50%,var(--card) 0)!important}
+.tcc{display:flex;align-items:center;justify-content:space-between;margin-top:12px;font-size:.88em}
+.tcc input{width:44px;height:32px;border:0;background:none;padding:0}
 .empty{color:var(--mu);text-align:center;margin-top:40px}
 footer{text-align:center;color:var(--mu);font-size:.78em;padding:24px}
 #ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
@@ -105,8 +157,9 @@ footer{text-align:center;color:var(--mu);font-size:.78em;padding:24px}
 .yt{text-decoration:none;background:#ff0033;color:#fff;border-radius:999px;padding:3px 10px;font-size:.72em;font-weight:700}
 .ytall{display:block;text-align:center;margin-top:12px;padding:13px;border-radius:14px;background:#ff0033;color:#fff;text-decoration:none;font-weight:700}
 .gem{background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570)!important}
-#ai,#st{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end}
-#st.on,#ai.on{display:flex}
+#ex,#ai,#st{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end}
+#st.on,#ai.on,#ex.on{display:flex}
+#ex{z-index:75}
 #ai{z-index:70}
 .sh{background:var(--bg);width:100%;border-radius:22px 22px 0 0;padding:20px 18px 30px;max-height:85vh;overflow:auto}
 .sh h4{margin:16px 0 8px;font-size:.78em;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}
@@ -118,11 +171,12 @@ input[type=range]{width:100%;accent-color:var(--ac)}
 </head>
 <body>
 <header>
- <div class="top"><h1>Chitarra Classica<small>Compositori e chitarristi dalle origini a oggi</small></h1><button class="ib" id="aib" aria-label="Ricerca AI">✨ AI</button><button class="ib" id="gear" aria-label="Impostazioni">⚙️</button></div>
+ <div class="top"><h1>Chitarra Classica<small>Compositori e chitarristi dalle origini a oggi</small></h1><div class="tbtn"><button class="ib aib" id="aib" aria-label="Ricerca AI"><svg viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="aig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285f4"/><stop offset=".5" stop-color="#9b72cb"/><stop offset="1" stop-color="#d96570"/></linearGradient></defs><path d="M12 1.5c.6 5.6 4.9 9.9 10.5 10.5-5.6.6-9.9 4.9-10.5 10.5C11.4 16.9 7.1 12.6 1.5 12 7.1 11.4 11.4 7.1 12 1.5z" fill="url(#aig)"/></svg><span>AI</span></button><button class="ib" id="gear" aria-label="Impostazioni">⚙️</button></div></div>
  <input id="q" placeholder="Cerca un compositore, un brano, un paese…">
  <div class="chips" id="chips"></div>
 </header>
-<main><section class="tlw"><button class="tlt" id="tlt"><span>🕰️ Linea del tempo</span><i id="tla">Apri ▾</i></button><div id="tlbox" hidden><p>Scorri di lato · tocca un nome per aprire la sua pagina</p><div class="tls" id="tls"></div></div></section><div id="tl"></div></main>
+<div id="tcp" hidden><div class="tch"><b>Colore del titolo</b><button class="ib" id="tcx">✕</button></div><div class="tcs" id="tcs"></div><label class="tcc">🎨 Scegli un altro colore <input type="color" id="tci"></label></div>
+<main><section class="tlw"><button class="tlt" id="tlt"><span>🕰️ Linea del tempo</span><i id="tla">Apri ▾</i></button><div id="tlbox" hidden><p>Scorri i periodi di lato · toccane uno per vedere i suoi autori</p><div class="tls" id="tls"></div></div></section><div id="tl"></div></main>
 <footer>Copyright © Ignazio Paolicelli · I link aprono le ricerche su YouTube</footer>
 
 <div id="ov"><div class="book" id="book"></div></div>
@@ -135,11 +189,21 @@ input[type=range]{width:100%;accent-color:var(--ac)}
  <p style="color:var(--mu);font-size:.75em;margin-bottom:0">Si apre Google in modalità AI con la domanda già inviata.</p>
 </div></div>
 <div id="toast" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#000;color:#fff;padding:8px 14px;border-radius:20px;font-size:.85em;z-index:90;display:none"></div>
+<div id="ex" class="st2"><div class="sh">
+ <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:1.2em">📋 Elenco degli autori</b><button class="ib" id="exx">✕</button></div>
+ <div class="opts" style="margin:10px 0"><button class="op sel" data-f="p">Per periodo</button><button class="op" data-f="a">In ordine alfabetico</button><button class="op" data-f="s">Solo nomi</button></div>
+ <textarea id="ext" rows="14" readonly style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--ln);background:var(--card);color:var(--tx);font:inherit;font-size:.85em"></textarea>
+ <div class="opts" style="margin-top:10px"><button class="op" id="excp">📋 Copia</button><a class="op" id="exdl" download="autori-chitarra.txt" style="text-decoration:none;color:inherit">⬇️ Scarica .txt</a></div>
+ <p id="exmsg" style="font-size:.78em;color:var(--mu);margin-bottom:0">Se il download non parte, usa «Copia» e incolla dove vuoi.</p>
+</div></div>
 <div id="st"><div class="sh">
  <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:1.2em">Impostazioni</b><button class="ib" id="stx">✕</button></div>
  <h4>Tema</h4><div class="opts" id="oT"></div>
  <div style="display:none"><h4>Sfondo dei riquadri</h4><div class="opts"><button class="op" id="bgdef">🎨 Colore del periodo</button><label class="op">📷 Scegli una mia foto<input type="file" accept="image/*" id="bgin" hidden></label></div>
  <div id="bgprev"></div></div>
+ <h4>Esporta</h4><div class="opts"><button class="op" id="exb">📋 Esporta i nomi di tutti gli autori</button></div>
+ <h4>Stile delle anteprime</h4><div class="opts" id="oC"></div>
+ <h4>Dimensione anteprime</h4><div class="opts" id="oZ"></div>
  <h4>Carattere</h4><div class="opts" id="oF"></div>
  <h4>Dimensione carattere: <span id="fsv"></span></h4><input type="range" id="fs" min="13" max="26" step="1">
 </div></div>
@@ -390,6 +454,133 @@ const D={
 };
 
 
+// ===== APPUNTI (Vol. 1 e Vol. 2) =====
+// Note per periodo
+const PN={
+ori:["Con la nascita dell'arte musicale laica, cantori, menestrelli e mimi cantavano nelle corti accompagnandosi con chitarra, viola o liuto.","I «musici», invece, studiavano la musica solo dal punto di vista teorico.","<b>La chitarra medievale</b>: accordatura stabile, dimensioni piccole; si appoggiava sul petto dell'esecutore, sorretta dall'avambraccio destro con il polso ripiegato verso l'interno."],
+rin:["La letteratura scritta per chitarra nasce tra il 1546 e il 1556.","Con la nascita della <b>stampa</b> e il consolidarsi della borghesia la chitarra diventa famosa: ogni nobile doveva saper suonare uno strumento a corda.","<b>L'intavolatura</b>: un tetragramma con numeri (Italia e Spagna) o lettere (Francia) per indicare i tasti.","Accordatura della chitarra a 4 cori: intervalli 4 / 3 / 3 (dai tuoi appunti).","Autori: Melchiorre de Barberiis, Alberto da Ripa (liuto); Alonso Mudarra e Miguel de Fuenllana (vihuela); Adrian Le Roy (liutista ed editore)."],
+bar:["Declino del <b>liuto</b> e crescita, anche in bellezza, della chitarra.","Il termine <b>Sonata</b> indicava opere di vario tipo: assoli e piccoli gruppi strumentali.","<b>Italiani</b>: Montesardo inventa l'«alfabeto» (una lettera = un accordo); Foscarini introduce la <b>notazione mista</b> (lettere degli accordi + passaggi melodici, le «sonate pizzicate»); con Roncalli inizia il declino della chitarra barocca, superata dall'intavolatura e dalle nuove composizioni per violino e clavicembalo. Altri: Corbetta, Calvi, Granata, Carbonchi, Bartolotti, Pellegrini.","<b>Francesi</b>: Corbetta, de Visée, Campion — compostezza formale, semplicità ed equilibrio.","<b>Spagnoli</b>: Sanz, Ruiz de Ribayaz, Guerau, Santiago de Murcia."],
+cla:["<b>Tra Barocco e Classicismo (1750–1800)</b>: nasce la scrittura moderna su un solo rigo in chiave di violino. Merchi, La Garde, Corrette e Molino pubblicano a Parigi.","<b>1808</b>: apertura della casa editrice Ricordi a Milano.","<b>Sonata</b> = un movimento; <b>Grande Sonata</b> = più movimenti. Il termine indica ormai anche la musica da camera (strumento solo o in coppia con il pianoforte).","<b>Struttura classica</b>: Allegro (esposizione, sviluppo, ripresa) – movimento lento (Adagio, Largo) – movimento di danza (Minuetto, Scherzo) – Finale veloce.","<b>Tema con variazioni</b>: la forma più usata nell'Ottocento; il tema viene da una canzone popolare, da un'aria d'opera o da un'idea dell'autore.","<b>Centri</b>: Parigi, Londra (Sor, Giuliani, Bortolazzi, Thompson; Clementi), Vienna (Giuliani, de Costa, von Call, Molitor, Matiegka, Diabelli), Russia (Canobbio, Galliani, Tropinin).","<b>Canto e chitarra</b>: Weber, Blangini, Moretti, Camoglio."],
+rom:["Periodo di <b>decadenza</b> (1840–1880): Liszt, Berlioz e Wagner cercano sonorità orchestrali e modulazioni audaci; la chitarra viene emarginata.","<b>L'armonia</b> è il campo di ricerca del chitarrista romantico: accordi in tensione continua, non più fermi su tonica e dominante come in Carulli; cromatismi. «C'è più armonia in una battuta di Coste che in tutta la musica di Carulli».","Scompare la <b>forma sonata</b>; nascono pezzi lunghi sul modello del poema sinfonico; restano variazioni e studi (più geniali che didattici).","<b>Spagna</b>: dopo Aguado un romanticismo «slavato» (Broca, Cano, Viñas). Con <b>Arcas</b> la chitarra rinasce grazie ad ampiezza dinamica e varietà timbrica.","<b>Torres</b>: chitarre più grandi, nuovo sistema di catene interne, suono più lungo."],
+nov:["<b>La rinascita</b>: Debussy avvia il cambiamento e trasmette la lezione della chitarra a Manuel de Falla. La chitarra entra nella musica da camera (Webern, Schönberg; Respighi, «Antiche arie e danze per liuto»).","Tárrega morì troppo presto; Mozzani non se ne rese conto; Llobet se ne accorse ma non fu abbastanza audace. Il merito va a <b>Segovia</b>.","<b>I Segoviani</b>: Falla, Turina, Manén, Moreno Torroba, Mompou, Rodrigo, Asencio, Ponce, Castelnuovo-Tedesco, Tansman, Roussel, Samazeuilh, Migot, Pedrell, Duarte.","<b>Seconda metà del Novecento</b>: Presti, Bream, Díaz, Williams, Carlevaro, Yepes. In Italia la chitarra diventa espressione dei valori del <b>timbro</b>.","<b>L'avanguardia</b>: chitarra usata anche come idiofono (percussioni, strofinamenti), oggetti per suoni nuovi (ditali, bicchieri, lamette, cucchiaini), improvvisazione, nuove notazioni. Dopo «Le marteau sans maître» di Boulez, Berio, Kagel e Stockhausen usano la chitarra in orchestra."],
+con:["<b>Generazione del Venti</b>: compositori di ispirazione popolare (Lauro, Carlevaro, Duarte).","<b>Chitarristi compositori</b> che si confrontano con la nuova musica: Brouwer, Bogdanović e altri.","<b>Autori per la didattica e i concerti</b> e giovani autori italiani (vedi elenco)."]
+};
+// Altri autori citati negli appunti (per periodo)
+const PX={
+bar:["Calvi, Carbonchi, Pellegrini – chitarristi italiani del Seicento"],
+cla:["La Garde – opere stampate a Parigi","Antonio de Costa – abile chitarrista a Vienna","Thomas Perronet Thompson – concerti a Londra","Carlo Canobbio, Pasquale Galliani, Tropinin – Russia","Jean Camoglio – 6 ariette per canto e chitarra"],
+rom:["José Broca, Antonio Cano, José Viñas – Spagna, dopo Aguado"],
+nov:["Raúl Borges – fondò a Caracas una famosa accademia di chitarra (con Alirio Díaz e Lauro); Obras para guitarra (12 pezzi in vena popolare)","Fabini – compositore uruguaiano (non chitarrista)","Girardi (1889–1963) – Sonata para guitarra","Haug, Harris – autori del repertorio segoviano","Mario Barbieri – La serra, Suite pittoresca","Bruno Bartolozzi – Tre pezzi","Perruzzi – Soledades, Quattro pezzi","Prosperi – Canto dell'arpeggione","Marcianò – Partite, Ricordanze","Mannino – Sonata breve","Quaranta – Rojo clareles que aroman","Dalla Vecchia","Luciano Chailly – Invenzione su quattro note, Sonata in quattro tempi","Carlo Mosso – Quattro danze in stile modale, Forskalia, Tre canzoni piemontesi, Fantasia, Tre quaderni per chitarra","Ghiereghin – Les trois chansons jouées, Invenzione, Passacaglia, Toccata per due chitarre, Concerto, Misteri e baccanale (8 chitarre e percussioni), Danza dei giullari (4 chitarre)","Camillo Togni – Quasi una serenata","Aldo Clementi","Vittorio Fellegara – Eisblumen","Paolo Castaldi – Battente","Girolamo Arrigo – Serenata","Sylvano Bussotti – Rara (per chitarra, per voci e strumenti, per tre chitarre)","Giacomo Manzoni – Echi","Enrico Correggia – Trasparenze","Azio Corghi – Consonancias y redobles","Bosco – Rifrazioni"],
+con:["Edgar Alandia – Arietta","Claudio Ambrosini","Giovanni Antonioni – Se…! (L'ombre del vago)","Paolo Arcà – Aster e Anna","Chiara Benati – Non solo, Nel tempo della memoria, Capriccio","Vittorio Vinay – Thlayli, De la fée","Giuseppe Cancini – Voi ch'amate lo creatore","Fabio Vacchi – Plynn","Nauro Cardi – Aube","Tristano Gerardi – Passi","Mauro Castellano – Oltremare","Andrea Talmelli – Dialoghi","Federico Ermirio – Souvenir d'hiver (4 chitarre)","Pierpaolo Scattolini – Zodiacus","Alessandro Solbiati – Tre pezzi, Petit cadeau","Luca Francesconi – Alborada","Antonio Giacometti – Gaspard de la nuit","Adriano Guarnieri – Epistola per Armando","Carlo Landini – Etude minimale","Luca Lombardi – Thamar y Amnon","Danilo Lorenzini – Studio in mi","Pippo Molino – Frammento A, Frammento B","Gianfranco Pernaiachi – La consapevole assenza, Abendlied","Maurizio Pisati – Sette studi","Aurelio Samorì – Specht, Due miniature","Jorge La Brouve – 12 Études, Ceremonial","Álvaro Company – Las seis cuerdas (1963)","Miguel Alcázar – Suite","Alan Torok – Variations and Fugue on a Classical Theme","Robert Strizich – Sonata","Gilbert Biberian – musica per quartetto di chitarre","Carlo Carfagna – Frammenti, Ecloga, Damar, Ritorno a Citera","Pier Luigi Cimma – Impressioni pompeiane, Suite elpima","Vincenzo Saldarelli – Trittico","Didattica e concerti: Bruno Battisti D'Amario, Pino Briasco, Eduardo Caliendo, Raimondo Di Sandro, Cesare Lutzemberger, Roberto Masala","Giovani: Nuccio D'Angelo (Due canzoni lidie), Carlo Pessina (Passacaglia, vincitore del concorso Fronimo), Franco Cavallone, Rino Trasi","Luigi Biscaldi – Esercizi speciali di virtuosismo (3 quaderni)"]
+};
+// Note per autore
+const N={
+"Alonso Mudarra":["Vihuelista: tra i primi autori della letteratura stampata per lo strumento."],
+"Miguel de Fuenllana":["Vihuelista, insieme a Mudarra tra i protagonisti della vihuela spagnola."],
+"Adrian Le Roy":["Liutista ed editore."],
+"Francesco Corbetta":["Visse tra Francia e Inghilterra.","«La Guitarre Royalle», scritta per Carlo II, contiene brani vari e anche duetti."],
+"Robert de Visée":["Allievo di Corbetta e famoso tiorbista: a 20 anni suonava per il re nei giardini di Versailles.","Stile: compostezza formale, semplicità ed equilibrio."],
+"Gaspar Sanz":["Molto colto: prima dei brani scrisse ampie trattazioni storiche, estetiche e tecniche."],
+"Santiago de Murcia":["«Resumen»: raccolta di brani di diversi autori, come omaggio a Corelli, Lully, Campra e Marais.","Abile compositore e grande conoscitore dell'armonia; maestro della regina Maria Luisa Gabriella di Savoia."],
+"Ferdinando Carulli":["Parola chiave: <b>TIMBRO</b>. Circa 360 opere; il più «classico» di tutti.","Ricerca armonica e senso timbrico di sapore orchestrale (formazione napoletana). Trascrisse Rossini (più di tutti), Beethoven e Mozart.","Sei Andanti op. 320 dedicati a Matteo Carcassi.","<b>Metodo op. 27</b>: accordatura, scale, arpeggi, abbellimenti e studi.","<b>Sonate</b>: Sonatine op. 7. <b>Concerto</b> in La maggiore, in due tempi.","<b>Duetti</b> (circa 80): stile settecentesco, accordi spezzati e arpeggi, melodia mozartiana. Sei duetti op. 34; 3 duo op. 48, 62, 90 (Notturni); 3 Serenate op. 96; Notturno op. 118; 3 Notturni op. 143, 227; Duo op. 328.","<b>Canto e chitarra</b>: Grande aria italiana, su testo dello stesso Carulli, nel metodo op. 61."],
+"Dionisio Aguado":["Parola chiave: <b>BRILLANTE</b>. A Parigi fu un concertista ammirato per la chiarezza del suono e la velocità.","Tre Rondò brillanti op. 2, liberi dalle forme classiche.","Metodi con lezioni teoriche sul modo di suonare e sull'armonia. In Spagna fu quasi solo insegnante."],
+"Matteo Carcassi":["Parola chiave: <b>MELODICO</b> (era anche pianista). Suonava senza unghie, solo con il polpastrello.","Badava soprattutto alla linea melodica: «il Bellini della chitarra». Dolcezza a volte troppo molle e salottiera.","25 Studi melodici op. 60 (livello: circa terzo anno superiore)."],
+"Luigi Legnani":["Parola chiave: <b>VIRTUOSO</b>. Tenore e chitarrista, suonò in tutta Europa e pubblicò con Ricordi; poi tornò a Ravenna e si dedicò alla liuteria.","Originale per invenzione melodica e arditezza armonica. Paganini lo elogiò e i viennesi lo chiamarono «degno erede di Giuliani».","Circa 250 opere: la migliore è la serie dei 36 Capricci, ispirati all'arte violinistica di Paganini."],
+"Fernando Sor":["Parola chiave: <b>RICERCA ARMONICA</b> e uso del contrappunto.","Compose l'opera «Telemaco» a 19 anni, pur non essendo un bambino prodigio. Non ottenne un posto fisso alla cappella di corte e ripiegò sulla musica per balletto («Cendrillon»).","A Parigi la chitarra non era considerata come gli altri strumenti: Sor cercò di riabilitarla. Gli anni londinesi furono i suoi anni «romantici».","Fantasia op. 7: scritta su due righi, come per pianoforte; altre variazioni sono «nascoste» sotto il titolo di Fantasia.","<b>Studi</b>: 24 studi, 24 lezioni, 24 esercizi, 24 piccoli pezzi, 25 lezioni; usa tutte le risorse della mano.","<b>Sonate</b>: Gran Solo op. 14, Sonata in Do op. 15, Grande Sonata op. 22, Seconda Grande Sonata op. 25; Andante largo op. 5 n. 5. <b>Variazioni</b> op. 9 sul Flauto magico di Mozart.","<b>Duetti</b>: melodia e accompagnamento restano divisi. L'encouragement op. 34, Divertissement op. 38, 6 Valzer op. 39, Les deux amis op. 41, Valzer op. 44 bis, Divertissement op. 49, Le premier pas vers moi op. 53, 3 Duo op. 55, Trois petits divertissements op. 61, Divertissement op. 62, Souvenir de Russie op. 63.","<b>Canto e chitarra</b>: Seguidillas. <b>Metodo</b>: su come suonare e comporre."],
+"Mauro Giuliani":["<b>Caposcuola del chitarrismo italiano</b>. A 16 anni compose una Messa (non fu un bambino prodigio).","A Vienna, patria di Mozart e Haydn e ora di Beethoven, divenne un virtuoso ed entrò nell'élite musicale; suonò nell'orchestra alla prima della Settima Sinfonia.","A Vienna la chitarra era importante quanto gli altri strumenti, a differenza di Parigi. Gli fu riconosciuto il merito di aver ridato vita alla chitarra; per lui era importantissima la durata dei suoni.","Stile classico con tratti romantici; cercava melodie che facessero muovere velocemente la mano sinistra; ottimo orchestratore.","<b>Didattica</b>: 120 arpeggi, scale a note doppie, legature e abbellimenti; 24 Studi op. 48, 6 Preludi op. 83.","<b>Sonate</b>: Sonata op. 15 (importante), Ouverture op. 61, Sonata eroica op. 150, 3 Sonatine op. 71.","<b>Variazioni</b> (circa 40): op. 107 su tema di Händel, op. 38, op. 9, op. 45 sulla Follia; 6 Rossiniane.","<b>Concerti</b>: op. 30 in La (Allegro maestoso, Siciliana, Polonaise); op. 36 in La; op. 70 in Fa per grande orchestra.","<b>Duetti</b> (a differenza di Sor i due strumenti dialogano): Variazioni concertanti op. 35 e 130, Ländler op. 16, 55, 80, 92, 94, 3 Rondeaux op. 66, Gran Potpourri op. 67, La lira notturna op. 63, Le avventure d'amore op. 116, 3 Polonesi op. 137.","<b>Canto e chitarra</b>: 6 Ariette op. 95, Cavatine e Romanze op. 27, 29, 39, 6 Lieder op. 39."],
+"Napoléon Coste":["Allievo di Sor, riassume tutte le caratteristiche del chitarrista romantico: ricerca armonico-contrappuntistica e grande espressività.","Visse a Valenciennes, poi a Parigi, dove divenne allievo e amico di Sor.","A 49 anni partecipò al concorso del chitarrista russo Makaroff con le op. 27, 28, 29, 39 e vinse il 2° premio (il 1° andò a Mertz).","Nel 1863, a 58 anni, si ruppe il braccio e da allora compose soltanto.","Opere: fantasie, variazioni, sette pezzi episodici; la migliore è «La Source du Lyson» op. 47."],
+"Giulio Regondi":["Musica più legata al passato e più equilibrata di quella di Coste; segue Giuliani e Legnani.","Il padre, senza scrupoli, lo fece suonare ovunque da bambino prodigio (Lione, Parigi…). Sor gli dedicò il «Souvenir d'amitié», Fantasia op. 46.","Suonò e scrisse anche per la concertina, simile alla fisarmonica.","Opere: 4 studi (Do, Fa, La minore, Mi minore); Rêverie-Nocturne op. 19, singolare e innovativa; op. 20 la meno riuscita; Aria variata op. 21 e 22 (introduzione in minore e tema in maggiore, che ricorda le melodie napoletane).","<b>Capolavoro</b>: Introduction et Caprice op. 23."],
+"Johann Kaspar Mertz":["Ospite di famiglie agiate, suonò a Cracovia, Varsavia, Berlino, Dresda, Praga e Vienna. Nei concerti: potenza, energia, sensibilità, chiarezza.","Unisce la musica slava e quella europea; la sua anima è nel pezzo breve, conciso come il canto popolare.","<b>Capolavoro</b>: Bardenklänge, omaggio agli antichi cantori celti. Ogni brano è compiuto, ma tutti formano un'unica grande opera: colore, sentimento, invenzione.","Altre opere: Concerto, Mazurka, Introduction et Rondo brillant."],
+"Julián Arcas":["Da lui rinasce la chitarra spagnola, grazie ad ampiezza dinamica e varietà timbrica.","Fu proprio lui a spingere Torres a costruire strumenti adatti alle sue esigenze.","Brani: Bolero, Fantasia sulla Traviata di Verdi."],
+"Francisco Tárrega":["Inizialmente autodidatta, poi al Conservatorio di Madrid studiò pianoforte, armonia e composizione: una formazione alta rispetto agli altri chitarristi.","Suonò quasi sempre in Spagna e fu un grande didatta: allievi Miguel Llobet ed Emilio Pujol.","Non lasciò metodi né studi: dopo la sua morte gli allievi ne copiarono ogni atteggiamento. Domingo Prat ne demolì il mito nel suo «Diccionario de guitarristas».","Ignorò i chitarristi-compositori precedenti e si dedicò alle trascrizioni.","Composizioni: linea melodica fresca e spontanea in un'appropriata cornice armonica; gusto ispano-arabo (Capricho árabe, Danza mora, Recuerdos de la Alhambra). Le 4 Mazurche: Marieta, Mazurka en sol, Adelita, Sueño.","Morì troppo presto per entrare nella nuova realtà musicale del Novecento."],
+"Miguel Llobet":["<b>Maestro insigne del timbro</b>. Allievo ispirato da Tárrega; la passione nacque ascoltando un concerto di Manjón.","Dopo Parigi accettò un invito in Argentina e poi tornò; concertista soprattutto in Belgio, Olanda e Germania. La Prima guerra mondiale lo costrinse a tornare a Barcellona: inizio del declino.","Scrisse poche opere (era pigro e modesto), ma con melodie mai banali e un'armonia di una raffinatezza prima sconosciuta.","Brani: Scherzo-Vals, L'emigrant; Canciones populares catalanas (El testament d'Amèlia, Plany, Lo rossinyol, El fill del rei), il primo testo di musica moderna per chitarra.","Si accorse della nuova realtà del Novecento, ma non fu abbastanza audace. Nel 1926 pubblicò un'edizione dell'«Homenaje» di Falla con qualche piccolo dubbio."],
+"Emilio Pujol":["Allievo di Tárrega, che lo accolse dopo un'audizione a Barcellona: un rapporto maestro-allievo quasi religioso. Lo difese sempre, al contrario di Prat.","Esordì a Parigi come solista di bandurria, strumento a plettro del folklore della Spagna meridionale.","<b>Escuela razonada de la guitarra</b>: vasto trattato in 4 volumi, con esercizi e studi progressivi.","Trascrizioni dalla vihuela alla chitarra."],
+"Agustín Barrios Mangoré":["Mentre studiava armonia e contrappunto fu notato da Gustavo Sosa Escalada, che gli insegnò le basi della chitarra. Studiò anche filosofia e grafica.","Orgoglioso delle sue origini e contro il razzismo, si faceva chiamare con il nome di un cacicco (capo indio): Mangoré.","Apprezzatissimo in patria, tentò l'Europa (Bruxelles, Germania) ma fu boicottato e tornò sconfitto.","Negli anni '70 la sua musica fu riscoperta da chitarristi ed editori giapponesi e statunitensi.","Della stessa tempra di Sor e Giuliani. Brani folclorici: Danza paraguaya, Danza guaraní, Aconquija, Maxixe — scrittura brillantissima. Filone romantico: Choro da saudade, Aire de zamba, Julia Florida, Confesión, Valses, Mazurka appassionata. Impronta neobarocca: La Catedral (suite in 3 movimenti), Medallón antiguo, Gavota al estilo antiguo, Preludio op. 5 n. 1."],
+"Andrés Segovia":["Non inventò la chitarra da concerto: già Sor e Giuliani lo facevano. Si inserì nella rinascita della chitarra all'inizio del Novecento, comprendendo la nuova realtà meglio di tutti.","Autodidatta; suonava con le unghie, un'«eresia» per gli allievi di Tárrega, che lo tennero lontano dalla loro cerchia.","Grazie all'impresario Quesada suonò in grandi sale, non più in piccole associazioni. Nel 1924 il primo concerto a Parigi: da lì divenne famosissimo e fece più volte il giro del mondo.","Dal 1920 chiese a molti compositori (anche non chitarristi) di scrivere per lui; lui diteggiava e sistemava i brani. Preferì Ponce e Torroba a Sor e Giuliani, che squalificò sempre.","Insegnò all'Accademia Chigiana di Siena. Importanti le trascrizioni da Bach e dai romantici spagnoli Albéniz e Granados. Commissionò a Ponce il rifacimento della Grande Sonata di Paganini (pastiche).","Dal 1920 al 1960 si concentra il suo lavoro maggiore: la chitarra viene identificata con Segovia.","Nei tuoi appunti: suonò soprattutto musiche per il proprio repertorio, a causa di una preparazione musicale limitata."],
+"Manuel de Falla":["Conobbe Debussy, che gli fece notare l'originalità delle successioni armoniche dei chitarristi che accompagnano il <b>cante jondo</b> (il canto «profondo» del flamenco andaluso).","«Homenaje» (1920): per sdebitarsi con Debussy, poco prima dell'esordio di Segovia a Parigi. È una danza lenta con ritmo di habanera blando e sensuale, con un melisma che dà un senso di morte e purificazione.","L'originale è nella «Revue musicale», consegnato a Prunières, che lo aveva spinto a comporlo."],
+"Joaquín Turina":["Attratto come Falla dal cante jondo, ma meno profondo: tra naturalismo popolare e colorismo impressionista.","I suoi 5 pezzi hanno tensione drammatica, ritmi accesi con rasgueados e parti melismatiche: Sevillana, Homenaje a Tárrega, Fandanguillo, Ráfaga, Sonata."],
+"Federico Moreno Torroba":["Già nel 1920 compose per Segovia; i suoi brani, scritti tra le due guerre, sono fondamentali per tutto il repertorio segoviano.","Brani espressivi, ritmi ben delineati, melodia fresca e spontanea: Sonatina, Suite castellana, Nocturno, Serenata burlesca, Burgalesa, Pièces caractéristiques."],
+"Joaquín Rodrigo":["Il Concierto de Aranjuez (1939) è dedicato a Regino Sainz de la Maza.","Dedicò a Segovia: Fantasía para un gentilhombre, Tres piezas españolas, Por los campos de España."],
+"Manuel María Ponce":["In Ponce si realizzano tutte le predilezioni di Segovia. Il soggiorno in Italia e a Berlino migliorò la sua preparazione; a Parigi entrò nella vita musicale europea.","Caratteristiche: timbro suadente, essenzialità armonica, bellezza del canto — bravissimo a inventare melodie.","Scrisse brani spontanei e brani su richiesta di Segovia, anche «pastiches»: Sonata mexicana (4 movimenti), Sonata III, Sonatina meridional, Sonata romántica (omaggio a Schubert), Sonata clásica (omaggio a Sor); rifacimento della Grande Sonata di Paganini.","Concierto del Sur (forma classica); 24 Preludi (opera didattica); Thème varié et finale; Variazioni sulla Folía de España e Fuga; Variazioni su un tema di Antonio de Cabezón.","Scrittura chiara e ordinata, con modelli ottocenteschi: altamente raccomandabile a scopo didattico."],
+"Mario Castelnuovo-Tedesco":["Maestri: Ildebrando Pizzetti; nella sua musica la chitarra passò da piacevole a sostituire addirittura il pianoforte.","Dal 1932, su richiesta di Segovia, collaborarono per tutta la vita.","Opere: Sonata «Omaggio a Boccherini»; Variazioni attraverso i secoli (rapsodia dal Barocco alla musica da ballo americana); Capriccio diabolico (omaggio a Paganini); Tarantella (1936, musica popolare napoletana); Concerto; Serenade (la chitarra dialoga con fiati e archi).","In California era apprezzato soprattutto per la musica da film.","Dopoguerra: Rondò, Suite, Quintetto (chitarra e archi), Fantasia (chitarra e pianoforte); Romancero gitano (coro e chitarra); The Divan of Moses-Ibn-Ezra (voce e chitarra); Platero y yo (28 idilli per narratore e chitarra, da Jiménez); 24 Caprichos de Goya; Les guitares bien tempérées (24 preludi e fughe)."],
+"Alexandre Tansman":["Nel repertorio segoviano rappresenta l'impegno più avanzato verso la musica moderna; Segovia lo suonò fino agli ultimi concerti.","Anima polacca con elementi slavi, mitteleuropei e veneziani; visse a Parigi, a Hollywood durante la guerra, poi di nuovo a Parigi.","Mazurka (1926): il suo primo brano per chitarra, scrittura semplificata per un suono pulito.","Concertino (1946, pubblicato nel 1991), in 4 movimenti: Introduzione, Toccata, Intermezzo, Finale.","<b>Cavatina</b> (1950): la sua pagina più fervida, nata a Venezia — Preludio, Sarabande, Scherzino, Barcarole e Danza pomposa. Uno dei brani più importanti del Novecento (la pagina più alta del repertorio segoviano dopo l'«Homenaje»).","Suite in modo polonico (1962): 9 brani con polifonia e ostinati. Musique de cour: pastiche con orchestra. Hommage à Chopin e Variazioni su un tema di Scriabin (pubblicati nel 1972).","Scrive con estrema semplicità: nessuno ha mai tratto tanto da così pochi elementi."],
+"Heitor Villa-Lobos":["Il maggiore compositore latinoamericano della prima metà del Novecento; entrò nel mondo segoviano pur con obiettivi diversi.","Da piccolo studiò violoncello, clarinetto, sassofono e pianoforte; il padre gli proibì la chitarra, che divenne uno dei suoi grandi amori.","Negli anni '20 a Parigi diventò una celebrità; aveva già scritto la Suite populaire brésilienne e il Chôros n. 1.","<b>Suite populaire brésilienne</b>: Mazurka-choro, Schottisch-choro, Valsa-choro (la più bella), Gavota-choro; tutte in forma di rondò. Nel 1923 aggiunse il Chorinho.","<b>12 Studi</b>: Segovia gliene chiese uno, lui ne scrisse dodici. Segovia cercava purezza e lirismo; Villa-Lobos aggiunge dramma, contrasti dinamici e timbrici, e scrive seguendo la posizione naturale delle dita.","5 Preludi (luce e ombra); Fantasia concertante (orchestrazione densa: un mezzo insuccesso)."],
+"Frank Martin":["Quatre pièces brèves: caratterizzate da aree tonali."],
+"Ida Presti":["La più famosa chitarrista del secolo."],
+"Julian Bream":["Molto attivo nello stimolare i compositori anglosassoni."],
+"John Williams":["Esecutore impeccabile, attento al repertorio moderno e contemporaneo."],
+"Abel Carlevaro":["Autore di molti libri sulla tecnica della mano destra e sinistra; impegnato nella ricerca didattica d'avanguardia.","Escuela de la guitarra (quaderni didattici); Preludios americanos (5, forma tripartita); Cinco estudios (omaggio a Villa-Lobos); Concierto del Plata; Suite de antiguas danzas españolas (pastiche su temi di Sanz); Cronomías I (influssi della nuova musica europea)."],
+"Antonio Lauro":["Stile centrato sul «valse venezolano»; schiettezza di espressione e ispirazione semplice e immediata.","Brani: Suite venezolana, Concierto, Sonata; Variaciones sobre una canción infantil (più scolastica).","Famoso nel mondo grazie alle interpretazioni di Alirio Díaz."],
+"Mario Gangi":["Metodo per chitarra: nel 3° volume 22 studi da concerto con grande ricerca melodica."],
+"Leo Brouwer":["Ottimo direttore d'orchestra e il più famoso compositore del dopoguerra.","Prima fase: elementi cubani e ispano-americani con ricerche timbriche e formali — Danza característica, primi Estudios sencillos, Tres apuntes.","Dopo il contatto con l'Europa: Elogio de la danza, Canticum; La espiral eterna (clusters arpeggiati); seconda serie di Estudios sencillos; El Decamerón negro; Concierto elegíaco; Retrats catalans (su una melodia cara a Llobet)."],
+"Dušan Bogdanović":["Si rifà a Bartók, Prokof'ev e Stravinskij.","Didattica: Sept études intervallaires (1978, Ginevra); Polyrhythmic and Polymetric Studies (1990).","Jazz in California: Sonata n. 2 (1985), Jazz Sonata, Two Legends (voce e chitarra).","Memorie europee: 4 Bagatelle (ispirate a Italo Calvino), Introduction, Passacaglia and Fugue for the Golden Flower (musica balcanica e mediorientale)."],
+"Narciso Yepes":["Fece avvicinare Rodrigo alla chitarra per nuove opere; dopo di lui Rodrigo scrisse anche la Suite valenciana e gli Homenajes."]
+};
+// Nuovi autori dagli appunti
+const CN=[
+["Melchiorre de Barberiis","c.1500","dopo 1549","rin","Italia","Liutista e chitarrista","Liutista padovano e sacerdote, pubblicò a Venezia diversi libri di intavolatura per liuto.","4 Fantasie per chitarra (1549)|Intabolatura di lauto (libri 1546–1549)"],
+["Alberto da Ripa","c.1500","1551","rin","Italia/Francia","Liutista","Liutista mantovano, lavorò alla corte del re di Francia Francesco I. Famoso per il suo contrappunto.","2 Fantasie (esempi di arte contrappuntistica)|Livres de tablature de luth"],
+["Girolamo Montesardo","c.1580","?","bar","Italia","Ecclesiastico, musicista e didatta","Inventò un modo per scrivere gli accordi: a ogni lettera corrisponde un accordo sulla tastiera, con linee per indicare la direzione del colpo e simboli per gli accordi dissonanti.","Nuova inventione d'intavolatura (1606)|Bergamasche, gagliarde, passamezzi, tarantelle, romanesche, sarabande"],
+["Giovanni Paolo Foscarini","c.1600","dopo 1649","bar","Italia","Chitarrista e compositore","Autore di 5 libri per chitarra con danze, toccate, fantasie e pezzi per 2 chitarre. Introdusse la notazione mista.","Li cinque libri della chitarra alla spagnola|Sonate pizzicate|Pezzi per 2 chitarre"],
+["Angelo Michele Bartolotti","c.1615","c.1682","bar","Italia","Chitarrista e tiorbista","Bolognese, lavorò a Firenze e Parigi; scrisse musica raffinata in notazione mista.","Libro primo di chitarra spagnola (1640)|Secondo libro di chitarra"],
+["Giovanni Battista Granata","c.1620","1687","bar","Italia","Chitarrista e compositore","Bolognese, autore di numerosi libri per chitarra barocca.","Capricci armonici sopra la chitarriglia (1646)|Soavi concenti di sonate musicali"],
+["Ludovico Roncalli","1654","1713","bar","Italia","Nobile e chitarrista","Conte bergamasco, autore di una celebre raccolta di suite. Da lui la chitarra barocca inizia il declino.","Capricci armonici sopra la chitarra spagnola (9 suite, 1692)"],
+["Lucas Ruiz de Ribayaz","1626","c.1677","bar","Spagna","Sacerdote e musicista","Scrisse un trattato per chitarra e arpa con la teoria per leggere l'intavolatura.","Luz y norte musical (1677)"],
+["Francisco Guerau","1649","1722","bar","Spagna","Chitarrista e cantore","Scrisse per gente colta, spiegando tecnica, abbellimenti e la posizione di braccia e mani.","Poema harmónico (1694)"],
+["François Campion","c.1686","1748","bar","Francia","Chitarrista e tiorbista","Tiorbista all'Opéra di Parigi, sperimentò accordature nuove per la chitarra.","Nouvelles découvertes sur la guitare (1705)|Traité d'accompagnement"],
+["Michel Corrette","1707","1795","cla","Francia","Organista e didatta","Compositore e autore di metodi per molti strumenti; tra le opere stampate a Parigi nel passaggio al Classicismo.","Les dons d'Apollon (metodo per chitarra)"],
+["Giacomo Merchi","1730","c.1789","cla","Italia/Francia","Chitarrista e compositore","Napoletano attivo a Parigi, pubblicò musica per chitarra già scritta su un solo rigo in chiave di violino.","Sonate e duetti per chitarra|Arie con accompagnamento di chitarra"],
+["Francesco Molino","1768","1847","cla","Italia/Francia","Violinista, chitarrista e compositore","Nato a Ivrea, attivo a Parigi. Grande violinista e concertista, trasferì sulla chitarra il suo linguaggio violinistico. Famoso anche per il repertorio per chitarra a 5 corde.","Metodo (esercizi in tutte le tonalità)|Tre Sonate op. 6|Concerto in mi minore op. 56|Sonata op. 51|Variazioni su temi di Rossini|Supplemento al metodo op. 47"],
+["Leonhard von Call","1767","1815","cla","Austria","Chitarrista e compositore","Funzionario e musicista a Vienna, scrisse moltissima musica da camera con chitarra, su schemi tradizionali.","Trio op. 26|2 Quintetti|5 Quartetti|40 Trii|50 Duetti"],
+["Simon Molitor","1766","1848","cla","Austria","Violinista e compositore","Musicista viennese, sostenne la chitarra come strumento serio con sonate di stile classico.","Sonate per chitarra e violino op. 3 e op. 5|Grande Sonate op. 7"],
+["Wenzel Thomas Matiegka","1773","1830","cla","Boemia/Austria","Chitarrista e compositore","Chitarrista e maestro di cappella a Vienna, autore di trii e sonate.","Notturno op. 21 (flauto, viola, chitarra)|Trii per flauto, violino e chitarra|Sonate per chitarra"],
+["Anton Diabelli","1781","1858","cla","Austria","Compositore, editore e insegnante","Insegnò pianoforte e chitarra a Vienna; fu il vertice dell'arte chitarristica viennese, con circa 200 composizioni: trii, duetti, danze, sonate, 2 fughe.","Tre Sonate per chitarra|Trio op. 62 (chitarra e due chitarre terzine)|Duetti e danze"],
+["Bartolomeo Bortolazzi","1772","1846","cla","Italia/Austria","Mandolinista e chitarrista","Attivo a Vienna e Londra, pubblicò un metodo e variazioni per mandolino e per flauto con chitarra.","Metodo|Variazioni per flauto e chitarra op. 15|Variazioni per mandolino e chitarra op. 8"],
+["Filippo Gragnani","1767","1820","cla","Italia","Chitarrista e compositore","Livornese attivo a Parigi, autore di musica da camera con chitarra.","Trio op. 12|Duetti per chitarra"],
+["Antoine de Lhoyer","1768","1852","cla","Francia","Chitarrista e compositore","Ufficiale e chitarrista, visse anche in Russia; musica di stile vicino a Carulli.","Trio op. 29|Concerto per chitarra op. 16|Duetti"],
+["Federico Moretti","1769","1839","cla","Italia/Spagna","Militare e chitarrista","Napoletano attivo in Spagna, fu tra i primi a scrivere per la chitarra a sei corde con le voci separate.","Doce canciones españolas|Principios para tocar la guitarra de seis órdenes"],
+["Felice Blangini","1781","1841","cla","Italia/Francia","Cantante, compositore e didatta","Torinese attivo a Parigi, scrisse ariette, canzonette e notturni; Carulli ne realizzò gli accompagnamenti per chitarra.","Ariette|Canzonette|Notturni"],
+["Carl Maria von Weber","1786","1826","cla","Germania","Compositore","Autore del «Franco cacciatore», scrisse anche Lieder con accompagnamento di chitarra.","Lieder op. 13 e op. 25|Tre canzonette op. 29 (testo italiano)|Divertimento op. 38 (chitarra e pianoforte)"],
+["Antonio Jiménez Manjón","1866","1919","rom","Spagna","Chitarrista e compositore","Nato a Villacarrillo, contemporaneo di Tárrega, cieco da bambino. Suonò molto fuori dalla Spagna; concertista colto, erede della scuola di Aguado.","Tres estudios expresivos|Mazurka romántica|Capricho andaluz|Leyenda|Aire vasco"],
+["Jacques Tessarech","1862","?","rom","Francia","Chitarrista e studioso","Nato ad Ajaccio, ingegnere civile, studiò estetica e tecnica della chitarra senza fare attività concertistica.","Évolution de la guitare"],
+["Luigi Mozzani","1869","1943","nov","Italia","Chitarrista, oboista e liutaio","Nato a Faenza, diplomato in oboe a Bologna, suonò nell'orchestra del San Carlo di Napoli. Da piccolo studiò chitarra da autodidatta e la scelse perché con l'oboe restava disoccupato; fece concerti a Parigi. Poi lasciò i concerti per la liuteria e inventò la chitarra-lyra.","Feste lariane (tema con variazioni)|Preludio in Fa diesis maggiore|Raccoglimento|Romanza|Serenata|Per il sentiero fiorito|Prière|Coup de vent|Dolore"],
+["William Foden","1860","1947","nov","USA","Chitarrista e didatta","Nato a St. Louis, grande concertista e didatta, considerato il più grande chitarrista americano del suo tempo; recital alla Carnegie Hall.","Grand Method for Guitar"],
+["Heinrich Albert","1870","1950","nov","Germania","Chitarrista e studioso","Studiò repertorio e storia della chitarra e diresse la rivista «Der Gitarrefreund», documento storico sulla chitarra.","Etüdenwerk (6 volumi)|Der Gitarrefreund (rivista)"],
+["Julio Sagreras","1879","1960","nov","Argentina","Chitarrista e didatta","Musicista preparato, compositore anche di opere teatrali.","Lecciones de guitarra (6 volumi, 6 livelli)|Maria Luisa|El Colibrí"],
+["Ángel Barrios","1882","1964","nov","Spagna","Chitarrista e compositore","Granadino, figlio d'arte, allievo anche di Llobet. Con il Trio Iberia suonò le composizioni giovanili di Albéniz trascritte; poco conosciuto fuori da Granada.","Jardín granadino|El cortijo del aire|Pregón de las flores"],
+["Domingo Prat","1886","1944","nov","Spagna/Argentina","Chitarrista, storico e critico","Allievo di Llobet, docente a Buenos Aires, rigoroso nella tecnica. Elogiò Tárrega senza esaltarlo e volle eliminare il dilettantismo dai concerti.","Diccionario de guitarristas (1934)"],
+["Joan Manén","1883","1971","nov","Spagna","Violinista e compositore","Catalano, violinista celebre e buon pianista. Scrisse per Segovia un pezzo che trasforma un tema chitarristico in senso ritmico-armonico.","Fantasía-Sonata"],
+["Teresa De Rogatis","1893","1979","nov","Italia","Chitarrista, pianista e compositrice","Napoletana; il padre le insegnò la chitarra e a 9 anni suonava in concerto. Diplomata in pianoforte e composizione al Conservatorio di San Pietro a Majella: concertista di chitarra e di pianoforte. Insegnò al Cairo e poi tornò a Napoli.","Brani per chitarra|Studi"],
+["Federico Mompou","1893","1987","nov","Spagna","Pianista e compositore","Catalano, compositore di musica intima e raffinata; scrisse per Segovia.","Suite compostelana|Cançó i dansa"],
+["Paul Hindemith","1895","1963","nov","Germania","Compositore","Tra i più importanti compositori tedeschi del Novecento.","Rondò per tre chitarre"],
+["Isaías Sávio","1900","1977","nov","Uruguay/Brasile","Chitarrista e didatta","Uruguayano attivo in Brasile; brani per chitarra molto diffusi.","Brani per chitarra"],
+["Vicente Asencio","1908","1979","nov","Spagna","Compositore","Valenciano, scrisse per chitarra grazie a Narciso Yepes.","Suite valenciana|Homenajes|Collectici íntim"],
+["Antonio José","1902","1936","nov","Spagna","Compositore","Compositore spagnolo morto giovane durante la guerra civile.","Sonata para guitarra"],
+["Carlos Chávez","1899","1978","nov","Messico","Compositore","Grande compositore messicano interessato alla musica popolare.","Three Pieces for Guitar"],
+["Julián Carrillo","1875","1965","nov","Messico","Compositore e teorico","Elaborò un sistema musicale a quarti di tono, anche per chitarra.","Sonata|Concertino"],
+["Albert Roussel","1869","1937","nov","Francia","Compositore","Compositore francese; il suo brano «Segovia» ricalca gli aspetti tipici dell'arte di Segovia.","Segovia op. 29"],
+["Gustave Samazeuilh","1877","1967","nov","Francia","Compositore","Compositore francese del repertorio segoviano.","Sérénade"],
+["Georges Migot","1891","1976","nov","Francia","Compositore","Compositore francese del repertorio segoviano.","Pour un hommage à Claude Debussy (suite in 3 tempi)"],
+["Carlos Pedrell","1878","1941","nov","Uruguay/Francia","Compositore","Compositore del repertorio segoviano.","Trois pièces|Danza de la princesa cautiva"],
+["Gian Francesco Malipiero","1882","1973","nov","Italia","Compositore","Veneziano; il suo Preludio ha tonalità non definita, ritmi irregolari e cambi di misura.","Preludio"],
+["Giorgio Federico Ghedini","1892","1965","nov","Italia","Compositore","Lo Studio da concerto ha forma tripartita: dolce polifonia, danza modale tumultuosa e ritorno all'inizio.","Studio da concerto"],
+["Goffredo Petrassi","1904","2003","nov","Italia","Compositore","Tra i maggiori compositori italiani del Novecento.","Suoni notturni|Nunc (cellula melodica di 4 note)"],
+["Ennio Porrino","1910","1959","nov","Italia","Compositore","Compositore sardo.","Concerto dell'Argentarola (chitarra e orchestra)"],
+["Franco Margola","1908","1992","nov","Italia","Compositore","Bresciano, scrisse molto per chitarra sola e per duo.","Concerto breve (chitarra e archi)|Tre Sonate|Trittico|Leggenda|Notturno|Ballata|Due Preludi|Otto pezzi|Dieci composizioni"],
+["Bruno Bettinelli","1913","2004","nov","Italia","Compositore e didatta","Milanese, grande didatta; nei suoi brani grande importanza al canto.","Cinque Preludi|Quattro pezzi|Sonata breve|Dodici Studi"],
+["Bruno Maderna","1920","1973","nov","Italia","Compositore e direttore","Protagonista dell'avanguardia veneziana.","Y después (chitarra a 10 corde)|Aulodia per Lothar (oboe d'amore e chitarra, 1965)"],
+["Pierre Boulez","1925","2016","nov","Francia","Compositore e direttore","Con «Le marteau sans maître» aprì l'uso della chitarra nella musica d'avanguardia.","Le marteau sans maître (contralto, chitarra e 5 strumenti)"],
+["Luciano Berio","1925","2003","nov","Italia","Compositore","Tra i maggiori compositori dell'avanguardia.","Sequenza XI (scritta per Eliot Fisk)"],
+["Franco Donatoni","1927","2000","nov","Italia","Compositore","Scrittura semplice ma con continui cambi ritmici e una dinamica dai sussurri ai colpi più violenti.","Algo (Due pezzi)"],
+["John W. Duarte","1919","2004","nov","Inghilterra","Compositore e chitarrista","Detto «Jack». Studiò armonia e composizione, con formazione scientifica e passione per il jazz. Variazioni e arrangiamenti sulle canzoni popolari di mezzo mondo.","English Suite op. 31|Variations on a Catalan Folk Song op. 25|Variations on a French Nursery Song op. 32|Greek Suite op. 39|Suite piemontese op. 46|Mutations on the Dies Irae op. 58|Petite suite française op. 60|Night Music op. 65|Prelude, Canto and Toccata op. 38|Sonatina op. 27|A Tudor Fancy (concerto)"],
+["Barna Kováts","1923","2005","nov","Ungheria","Chitarrista e compositore","Chitarrista ungherese, insegnò a lungo al Mozarteum di Salisburgo.","Minutenstücke|Trois Mouvements|Suite (omaggio a Goldoni)"],
+["Alirio Díaz","1923","2016","nov","Venezuela","Chitarrista","Grande interprete venezuelano, allievo di Segovia; ispirato ai compositori del suo paese.","Interpretazioni di Lauro|Trascrizioni di musica venezuelana"],
+["Ernesto Cordero","1946",null,"con","Porto Rico","Compositore e chitarrista","Compositore portoricano ispirato ai ritmi caraibici.","Concierto antillano|Sonata|Descarga|Proteus|Cinco preludios"],
+["David Leisner","1953",null,"con","USA","Chitarrista e compositore","Chitarrista e compositore americano.","Simple Songs|Billy Boy Variations|Passacaglia and Toccata"],
+["Jaume Torrent","1953",null,"con","Spagna","Chitarrista e compositore","Stile romantico, vicino a Ponce per invenzione melodica.","24 Fantasías románticas|Fantasia-Sonata"]
+];
+C.push(...CN);
+
 const PM={};P.forEach(p=>PM[p[0]]=p);
 const FK=n=>"foto:"+n;
 const getF=n=>{try{return localStorage.getItem(FK(n))}catch(e){return null}};
@@ -459,15 +650,16 @@ const nS=g.n,courses=g.n>6?g.n/2:g.n;for(let j=0;j<courses;j++){const t=courses=
 return s+`</svg>`}
 const GSVG={};Object.keys(GP).forEach(k=>GSVG[k]=guitar(k));
 
-function frameCover(c,f){const p=PM[c[3]];return `<div style="display:none"></div><div class="plq" style="--pc:${p[3]}"><b>${esc(c[0])}</b><small>${yrs(c)}</small></div>`}
+function inz(n){return n.replace(/\b(de|da|del|di|von|el|y|la|X)\b/g,"").split(/\s+/).filter(w=>/^[A-ZÀ-Ý]/.test(w)).map(w=>w[0]).slice(0,2).join("")}
+function frameCover(c,f){const p=PM[c[3]];return `<div class="plq" style="--pc:${p[3]}"><i class="ini">${inz(c[0])}</i><div class="tx"><b>${esc(c[0])}</b><small>${yrs(c)}</small></div></div>`}
 function cover(c){const p=PM[c[3]];return `<div class="cov" style="--pc:${p[3]}"><span class="pill">${p[1]}</span><div class="cn"><b>${esc(c[0])}</b><small>${yrs(c)}</small></div></div>`}
 function render(){
  const q=$("#q").value.trim().toLowerCase();let out="",n=0;
  P.forEach(p=>{
-  const L=C.filter(c=>c[3]==p[0]&&(!q||c.join(" ").toLowerCase().includes(q)));
+  const L=C.filter(c=>c[3]==p[0]&&(!q||(c.join(" ")+" "+(N[c[0]]||[]).join(" ")).toLowerCase().includes(q))).sort((a,b)=>yr(a[1])-yr(b[1]));
   if(q&&!L.length)return;n+=L.length;
-  out+=`<section class="per" id="p-${p[0]}" style="--pc:${p[3]}"><span class="dot"></span><h2>${p[1]} <span class="yr">${p[2]}</span></h2><div class="pd">${p[4]}</div><div class="ins">${INS[p[0]]}</div><div class="grid">`+
-  L.map(c=>`<button class="bk" data-i="${C.indexOf(c)}"><div class="cv">${frameCover(c,getF(c[0]))}</div></button>`).join("")+`</div></section>`});
+  out+=`<section class="per" id="p-${p[0]}" style="--pc:${p[3]}"><span class="dot"></span><h2>${p[1]} <span class="yr">${p[2]}</span></h2><div class="pd">${p[4]}</div><div class="ins">${INS[p[0]]}</div>${PN[p[0]]?`<details class="pn"><summary>📒 Dai tuoi appunti</summary><ul>${PN[p[0]].map(t=>`<li>${t}</li>`).join("")}</ul>${PX[p[0]]?`<div class="pxh">Altri autori citati</div><ul class="px">${PX[p[0]].map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`:""}</details>`:""}<div class="grid">`+
+  L.map(c=>`<button class="bk" data-i="${C.indexOf(c)}" style="--pc:${PM[c[3]][3]}"><div class="cv">${frameCover(c,getF(c[0]))}</div></button>`).join("")+`</div></section>`});
  $("#tl").innerHTML=out||`<p class="empty">Nessun risultato</p>`;
 }
 $("#chips").innerHTML=P.map(p=>`<button class="chip" style="--pc:${p[3]}" data-p="${p[0]}"><i></i>${p[1]}</button>`).join("");
@@ -484,7 +676,8 @@ function openBook(c){
  <div class="sec"><h4>Biografia</h4><p style="margin:0">${esc(c[6])} ${esc((D[c[0]]||{}).b||x[0])}</p></div>
  ${D[c[0]]?`<div class="sec"><h4>🎵 Il suono e il tocco</h4><p style="margin:0">${esc(D[c[0]].s)}</p></div>
  <div class="sec"><h4>🚀 Cosa ha introdotto di nuovo</h4><p style="margin:0">${esc(D[c[0]].n)}</p></div>`:""}
- <div class="sec"><h4>⭐ L'importanza della sua musica</h4><p style="margin:0">${esc(x[1])}</p></div>
+ ${x[1]?`<div class="sec"><h4>⭐ L'importanza della sua musica</h4><p style="margin:0">${esc(x[1])}</p></div>`:""}
+ ${N[c[0]]?`<div class="sec ap"><h4>📒 Dai tuoi appunti</h4><ul>${N[c[0]].map(t=>`<li>${t}</li>`).join("")}</ul></div>`:""}
  <div class="sec"><h4>Opere e brani principali (in ordine di importanza)</h4><ol class="wl">${w.map(t=>`<li><span>${esc(t)}</span><a class="yt" target="_blank" rel="noopener" href="${yt((t.includes(c[0].split(" ").pop())?"":c[0]+" ")+t+" guitar")}">▶ YouTube</a></li>`).join("")}</ol></div>
  <a class="ytall" target="_blank" rel="noopener" href="${yt(c[0]+" classical guitar")}">▶ Tutti i video di ${esc(c[0])}</a>
  <a class="ytall gem gq" target="_blank" rel="noopener" href="${gem(gtxt(c))}" data-q="${esc(gtxt(c))}">✨ Approfondisci con l'AI</a>
@@ -515,9 +708,11 @@ const F={windows:["Windows (Segoe UI)",'"Segoe UI Variable","Segoe UI",system-ui
  playfair:["Playfair",'"Playfair Display",Georgia,serif'],
  inter:["Inter",'Inter,Arial,sans-serif'],
  mono:["Monospazio",'ui-monospace,"SF Mono",Menlo,Consolas,monospace']};
-let S={t:"apple",f:"apple",s:17};
+let S={t:"apple",f:"apple",s:17,c:"pastello",z:"s",v:3};
 try{Object.assign(S,JSON.parse(localStorage.getItem("chit-set")||"{}"))}catch(e){}
-function apply(){if(!T[S.t])S.t="apple";if(!F[S.f])S.f="apple";
+const CS={pastello:"🎨 Pastello",minimal:"➖ Minimal"};
+const ZS={s:"Piccole",m:"Medie",l:"Grandi"};
+function apply(){if(!CS[S.c])S.c="pastello";if(!S.v||S.v<2){S.f="apple"}if(!S.v||S.v<3){S.z="s";S.v=3}if(!ZS[S.z])S.z="s";document.documentElement.dataset.c=S.c;document.documentElement.dataset.z=S.z;$("#oC").innerHTML=Object.entries(CS).map(([k,v])=>`<button class="op${k==S.c?" sel":""}" data-k="${k}">${v}</button>`).join("");$("#oZ").innerHTML=Object.entries(ZS).map(([k,v])=>`<button class="op${k==S.z?" sel":""}" data-k="${k}">${v}</button>`).join("");if(!T[S.t])S.t="apple";if(!F[S.f])S.f="apple";
  document.documentElement.dataset.t=S.t;
  document.documentElement.style.setProperty("--ff",F[S.f][1]);
  document.documentElement.style.setProperty("--fs",S.s+"px");
@@ -526,7 +721,9 @@ function apply(){if(!T[S.t])S.t="apple";if(!F[S.f])S.f="apple";
  $("#oF").innerHTML=Object.entries(F).map(([k,v])=>`<button class="op${k==S.f?" sel":""}" data-k="${k}" style="font-family:${v[1].replace(/"/g,"'")}">${v[0]}</button>`).join("");
  try{localStorage.setItem("chit-set",JSON.stringify(S))}catch(e){}
 }
-$("#oT").onclick=e=>{const b=e.target.closest(".op");if(b){S.t=b.dataset.k;if(/^win/.test(S.t))S.f="windows";else if(/^apple/.test(S.t))S.f="apple";apply()}};
+$("#oT").onclick=e=>{const b=e.target.closest(".op");if(b){S.t=b.dataset.k;apply()}};
+$("#oC").onclick=e=>{const b=e.target.closest(".op");if(b){S.c=b.dataset.k;apply()}};
+$("#oZ").onclick=e=>{const b=e.target.closest(".op");if(b){S.z=b.dataset.k;apply()}};
 $("#oF").onclick=e=>{const b=e.target.closest(".op");if(b){S.f=b.dataset.k;apply()}};
 $("#fs").oninput=e=>{S.s=+e.target.value;apply()};
 $("#gear").onclick=()=>$("#st").classList.add("on");
@@ -535,20 +732,34 @@ $("#st").onclick=e=>{if(e.target.id=="st")$("#st").classList.remove("on")};
 function yr(v){return parseInt(String(v).replace(/[^0-9]/g,""))}
 const NOW=2026,X0=1200,X1=1450;
 const tx=y=>y<X1?(y-X0)*.7:(X1-X0)*.7+(y-X1)*4.2;
-function timeline(){const rows=[],RH=23,TOP=44;let items=C.map((c,i)=>({c,i,b:yr(c[1]),d:c[2]?yr(c[2]):NOW})).sort((a,b)=>a.b-b.b);
-let h="";items.forEach(o=>{const x=tx(o.b),w=o.c[0].length*5.3+40;let r=0;while(rows[r]!==undefined&&rows[r]>x-4)r++;rows[r]=x+w;o.x=x;o.w=w;o.r=r});
-const W=tx(NOW)+40,Ht=TOP+rows.length*RH+26;
-const PB=[["ori",X0,1400],["rin",1400,1600],["bar",1600,1750],["cla",1750,1830],["rom",1830,1900],["nov",1900,1975],["con",1975,NOW]];
-PB.forEach(([k,a,b])=>{const p=PM[k];h+=`<div class="tlb" style="--pc:${p[3]};left:${tx(a)}px;width:${tx(b)-tx(a)}px;background:color-mix(in srgb,${p[3]} 7%,transparent)"><span>${p[1]}</span><small>${p[2]}</small></div>`});
-for(let y=1250;y<=2000;y+=y<1450?100:50)h+=`<div class="tlx" style="left:${tx(y)}px">${y}</div>`;
-items.forEach(o=>{const p=PM[o.c[3]];h+=`<i style="position:absolute;left:${o.x}px;top:${TOP+o.r*RH+9}px;width:${tx(o.d)-o.x}px;height:2px;background:${p[3]};opacity:.35;border-radius:2px"></i><button class="tli" data-i="${o.i}" style="left:${o.x}px;top:${TOP+o.r*RH}px;background:linear-gradient(90deg,${p[3]},color-mix(in srgb,${p[3]} 70%,#000))">${esc(o.c[0])}<span style="opacity:.75">${o.c[1].replace("c.","")}</span></button>`});
-$("#tls").innerHTML=`<div class="tl" style="width:${W}px;height:${Ht}px">${h}</div>`}
-$("#tls").onclick=e=>{const b=e.target.closest(".tli");if(b)openBook(C[+b.dataset.i])};
+function timeline(){const items=C.map((c,i)=>({c,i,b:yr(c[1])})).sort((a,b)=>a.b-b.b);
+const PB=[["ori",0,1400],["rin",1400,1600],["bar",1600,1750],["cla",1750,1830],["rom",1830,1900],["nov",1900,1975],["con",1975,3000]];
+let h="",row="";PB.forEach(([k,a,z])=>{const g=items.filter(o=>o.c[3]==k);if(!g.length)return;const p=PM[k];let cent=null,body="";
+g.forEach(o=>{const ce=Math.floor(o.b/100);if(ce!==cent){cent=ce;body+=`<div class="vtc"><span>${ce*100}</span></div>`}const q=PM[o.c[3]];body+=`<button class="vti" data-i="${o.i}" style="--pc:${q[3]}"><span class="vty">${o.c[1].replace("c.","c. ")}</span><i></i><span class="vtn"><b>${esc(o.c[0])}</b><small>${yrs(o.c)} · ${esc(o.c[4])}</small></span></button>`});
+row+=`<button class="vtp" data-g="${k}" style="--pc:${p[3]}"><b>${p[1]}</b><small>${p[2]}</small><small>${g.length} ${g.length==1?"autore":"autori"}</small></button>`;h+=`<div class="vtg vt" id="vg-${k}" hidden>${body}</div>`});
+$("#tls").innerHTML=`<div class="vtrow">${row}</div><div id="vtsel">${h}</div>`}
+$("#tls").onclick=e=>{const g=e.target.closest(".vtp");if(g){const d=$("#vg-"+g.dataset.g),was=!d.hidden;document.querySelectorAll(".vtg").forEach(x=>x.hidden=true);document.querySelectorAll(".vtp").forEach(x=>x.classList.remove("op2"));if(!was){d.hidden=false;g.classList.add("op2");g.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"})}return}const b=e.target.closest(".vti");if(b)openBook(C[+b.dataset.i])};
 function setBg(d){try{d?localStorage.setItem("chit-bg",d):localStorage.removeItem("chit-bg")}catch(e){}applyBg()}
 function applyBg(){let d=null;try{d=localStorage.getItem("chit-bg")}catch(e){}document.body.classList.toggle("hasbg",!!d);if(d)document.documentElement.style.setProperty("--bgimg",`url(${d})`);$("#bgprev").innerHTML=d?`<img src="${d}" style="width:70px;height:70px;object-fit:cover;border-radius:12px;vertical-align:middle;margin-right:8px">Foto in uso`:"In uso: colore del periodo";$("#bgdef").classList.toggle("sel",!d)}
 $("#bgdef").onclick=()=>setBg(null);
 $("#bgin").onchange=e=>{const file=e.target.files[0];if(!file)return;const im=new Image();im.onload=()=>{const W=500,cv=document.createElement("canvas");cv.width=W;cv.height=W;const k=Math.max(W/im.width,W/im.height),g=cv.getContext("2d");g.drawImage(im,(W-im.width*k)/2,(W-im.height*k)/2,im.width*k,im.height*k);URL.revokeObjectURL(im.src);setBg(cv.toDataURL("image/jpeg",.8))};im.src=URL.createObjectURL(file)};
-apply();applyBg();render();
+let exF="p";
+function exText(){const L=[...C].sort((a,b)=>yr(a[1])-yr(b[1]));
+if(exF=="s")return L.map(c=>c[0]).join("\n");
+if(exF=="a")return [...C].sort((a,b)=>a[0].localeCompare(b[0],"it")).map(c=>`${c[0]} (${yrs(c)})`).join("\n");
+return P.map(p=>{const g=L.filter(c=>c[3]==p[0]);return g.length?`${p[1].toUpperCase()} (${p[2]})\n`+g.map(c=>`- ${c[0]} (${yrs(c)}) – ${c[4]}`).join("\n"):""}).filter(Boolean).join("\n\n")+`\n\nTotale: ${C.length} autori\nCopyright © Ignazio Paolicelli`}
+function exUpd(){const t=exText();$("#ext").value=t;$("#exdl").href="data:text/plain;charset=utf-8,"+encodeURIComponent(t)}
+$("#exb").onclick=()=>{$("#st").classList.remove("on");exUpd();$("#ex").classList.add("on")};
+$("#exx").onclick=()=>$("#ex").classList.remove("on");
+$("#ex").onclick=e=>{if(e.target.id=="ex")$("#ex").classList.remove("on");const b=e.target.closest("[data-f]");if(b){exF=b.dataset.f;document.querySelectorAll("#ex [data-f]").forEach(x=>x.classList.toggle("sel",x==b));exUpd()}};
+$("#excp").onclick=()=>{const t=$("#ext").value;const ok=()=>$("#exmsg").textContent="✓ Copiato! Ora puoi incollarlo dove vuoi.";try{navigator.clipboard.writeText(t).then(ok,()=>{$("#ext").select();document.execCommand("copy");ok()})}catch(e){$("#ext").select();try{document.execCommand("copy");ok()}catch(_){}}};
+const TCOL=["","#1d1d1f","#ffffff","#0071e3","#34c759","#ff3b30","#ff9500","#ffcc00","#af52de","#ff2d55","#5ac8fa","#8e5a2b","#b8860b","#2e6da4","#3f7d4e","#8e3b6f","#c0392b","#636366"];
+function applyTc(){const v=S.tc||"";if(v)document.documentElement.style.setProperty("--tc",v);else document.documentElement.style.removeProperty("--tc");$("#tcs").innerHTML=TCOL.map(c=>`<button class="${c?"":"auto"}${c==v?" sel":""}" data-c="${c}" style="background:${c||"none"}" title="${c||"Automatico (tema)"}"></button>`).join("");$("#tci").value=v||"#1d1d1f";try{localStorage.setItem("chit-set",JSON.stringify(S))}catch(e){}}
+document.querySelector("h1").onclick=()=>{$("#tcp").hidden=!$("#tcp").hidden};
+$("#tcx").onclick=()=>$("#tcp").hidden=true;
+$("#tcs").onclick=e=>{const b=e.target.closest("[data-c]");if(b){S.tc=b.dataset.c;applyTc()}};
+$("#tci").oninput=e=>{S.tc=e.target.value;applyTc()};
+apply();applyTc();applyBg();render();
 let tlDone=0;$("#tlt").onclick=()=>{const b=$("#tlbox");b.hidden=!b.hidden;$("#tla").textContent=b.hidden?"Apri ▾":"Chiudi ▴";if(!b.hidden&&!tlDone){timeline();tlDone=1}};
 </script>
 </body>
