@@ -1,0 +1,55 @@
+name: Compila APK Chitarra Classica
+
+on:
+  push:
+    paths:
+      - "ChitarraClassica.zip"
+      - ".github/workflows/build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Estrai lo zip
+        run: |
+          unzip -q -o ChitarraClassica.zip -d estratto
+          DIR=$(dirname "$(find estratto -name settings.gradle | head -1)")
+          echo "PROG=$DIR" >> $GITHUB_ENV
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Crea chiave di firma generica
+        run: |
+          keytool -genkeypair -v -keystore "$PWD/chiave.jks" -alias android \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass android -keypass android -dname "CN=Android"
+          echo "KS_FILE=$PWD/chiave.jks" >> $GITHUB_ENV
+
+      - name: Compila APK
+        env:
+          KS_PASS: android
+          KS_ALIAS: android
+        run: |
+          cd "$PROG"
+          gradle assembleRelease --no-daemon
+          cp app/build/outputs/apk/release/app-release.apk "$GITHUB_WORKSPACE/ChitarraClassica.apk"
+
+      - name: Crea Release con l'APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Chitarra Classica v${{ github.run_number }}
+          files: ChitarraClassica.apk
