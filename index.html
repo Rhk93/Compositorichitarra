@@ -182,6 +182,9 @@ footer{text-align:center;color:var(--mu);font-size:.78em;padding:24px}
 .op{border:2px solid transparent;background:var(--card);border-radius:12px;padding:8px 13px;font-size:.88em;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .op.sel{border-color:var(--ac)}
 input[type=range]{width:100%;accent-color:var(--ac)}
+.pdfs{margin:12px 0 4px;padding:12px;border-radius:14px;background:var(--bg);border:1px solid var(--ln);display:flex;flex-direction:column;gap:8px}
+.pdfs input[type=text],#pdfbr{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--ln);background:var(--card);color:var(--tx);font:inherit;font-size:.95em}
+.pdfs label{font-size:.85em;color:var(--mu);display:flex;align-items:center;gap:6px}
 .pdfi{margin:6px 0 8px;font-size:.9em;color:var(--mu)}.pdfl{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .pdfa{display:inline-block;text-decoration:none;background:var(--card);border:1px solid var(--ln);border-radius:999px;padding:5px 10px;margin:3px 4px 3px 0;font-size:.8em;color:inherit}
 .pdfw{list-style:none;padding:0;margin:8px 0}.pdfw li{padding:8px 0;border-top:1px solid var(--ln)}
@@ -703,7 +706,7 @@ function openBook(c){
  ${N[c[0]]?`<div class="sec ap"><h4>📒 Dai tuoi appunti</h4><ul>${N[c[0]].map(t=>`<li>${t}</li>`).join("")}</ul></div>`:""}
  <div class="sec"><h4>Opere e brani principali (in ordine di importanza)</h4><ol class="wl">${w.map(t=>`<li><span>${esc(t)}</span><a class="yt" target="_blank" rel="noopener" href="${yt((t.includes(c[0].split(" ").pop())?"":c[0]+" ")+t+" guitar")}">▶ YouTube</a></li>`).join("")}</ol></div>
  <a class="ytall" target="_blank" rel="noopener" href="${yt(c[0]+" classical guitar")}">▶ Tutti i video di ${esc(c[0])}</a>
- <div class="sec"><h4>📄 Spartiti PDF gratuiti</h4><p class="pdfi">Cerca negli archivi gratuiti tutte le opere di ${esc(c[0])}, con le diverse edizioni e i revisori.</p><button class="op" id="pdfgo" data-n="${esc(c[0])}">🔎 Cerca gli spartiti</button><div id="pdfres"></div><div class="pdfl">${pdfLinks(c[0])}</div></div>
+ <div class="sec"><h4>📄 Spartiti PDF gratuiti</h4><p class="pdfi">Cerca negli archivi gratuiti tutte le opere di ${esc(c[0])}, con le diverse edizioni e i revisori.</p><button class="op" id="pdfgo" data-n="${esc(c[0])}">🔎 Tutte le opere</button><div class="pdfs"><b>🎼 Cerca un brano specifico</b><input id="pdfbr" enterkeyhint="search" placeholder="Scrivi il nome del brano (es. Lágrima, Studio op. 60)"><label><input type="checkbox" id="pdfau" checked> solo di ${esc(c[0])}</label><button class="op" id="pdfbg" data-n="${esc(c[0])}">Cerca il brano</button></div><div id="pdfres"></div><div class="pdfl">${pdfLinks(c[0])}</div></div>
  <a class="ytall gem gq" target="_blank" rel="noopener" href="${gem(gtxt(c))}" data-q="${esc(gtxt(c))}">✨ Approfondisci con l'AI</a>
  <div class="sec"><h4>Il periodo e la sua chitarra</h4><p style="margin:0;font-size:.92em">${p[4]}</p><p style="margin:6px 0 0;font-size:.85em;color:var(--mu)">${INS[p[0]]}</p></div>
  <div class="sec"><h4>Foto di copertina</h4>
@@ -793,22 +796,37 @@ const IA="https://imslp.org/api.php",CA="https://commons.wikimedia.org/w/api.php
 const MW=(api,q)=>fetch(api+"?origin=*&format=json&"+q).then(r=>r.json()).catch(()=>null);
 const sur=n=>n.split(" ").pop();
 function pdfLinks(n){const q=ue(n);return [["IMSLP","https://imslp.org/index.php?search="+q],["CPDL","https://www.cpdl.org/wiki/index.php?search="+q],["Mutopia","https://www.mutopiaproject.org/cgibin/make-table.cgi?searchingfor="+q],["Free-scores","https://www.free-scores.com/find-sheet-music.php?search="+q],["Musopen","https://musopen.org/sheetmusic/?q="+q],["MuseScore","https://musescore.com/sheetmusic?text="+q+"+guitar"]].map(l=>`<a class="pdfa" target="_blank" rel="noopener" href="${l[1]}">${l[0]}</a>`).join("")}
-let PW=[],PC=[],PL=80;
+let PW=[],PC=[],PL=80,PH="";
 async function pdfCerca(c){
  const n=c[0],box=$("#pdfres");box.innerHTML='<p class="pdfi">Ricerca in corso…</p>';
  const [s,cm]=await Promise.all([MW(IA,"action=query&list=search&srnamespace=14&srlimit=10&srsearch="+ue(n)),MW(CA,"action=query&generator=search&gsrnamespace=6&gsrlimit=50&prop=imageinfo&iiprop=url&gsrsearch="+ue(n+" filetype:pdf"))]);
  const cat=s&&s.query?(s.query.search.find(r=>r.title.toLowerCase().includes(sur(n).toLowerCase()))||{}).title:null;
- PW=[];
+ PW=[];PH="opere su IMSLP";
  if(cat){let co="";for(let i=0;i<8;i++){const j=await MW(IA,"action=query&list=categorymembers&cmtype=page&cmlimit=500&cmtitle="+ue(cat)+(co?"&cmcontinue="+ue(co):""));if(!j)break;((j.query&&j.query.categorymembers)||[]).forEach(m=>PW.push(m.title));co=(j.continue&&j.continue.cmcontinue)||(j["query-continue"]&&j["query-continue"].categorymembers.cmcontinue)||"";if(!co)break}}
  PC=cm&&cm.query?Object.values(cm.query.pages).filter(p=>p.imageinfo):[];PL=80;
  if(!s&&!cm){box.innerHTML='<p class="pdfi">Ricerca diretta non disponibile adesso. Usa i link agli archivi qui sotto.</p>';return}
  if(!PW.length&&!PC.length){box.innerHTML='<p class="pdfi">Nessuno spartito gratuito trovato. Le opere di autori moderni sono spesso protette da copyright: prova i link qui sotto.</p>';return}
  pdfList();
 }
+async function pdfBrano(c){
+ const t=($("#pdfbr").value||"").trim(),box=$("#pdfres");if(!t){$("#pdfbr").focus();return}
+ const solo=$("#pdfau").checked,sn=sur(c[0]),q=t+(solo?" "+sn:"");
+ box.innerHTML='<p class="pdfi">Cerco «'+esc(t)+'»…</p>';
+ const ln=document.querySelector(".pdfl");if(ln)ln.innerHTML=pdfLinks(q);
+ const [s,cm]=await Promise.all([MW(IA,"action=query&list=search&srnamespace=0&srlimit=50&srsearch="+ue(q)),MW(CA,"action=query&generator=search&gsrnamespace=6&gsrlimit=30&prop=imageinfo&iiprop=url&gsrsearch="+ue(q+" filetype:pdf"))]);
+ if(!s&&!cm){box.innerHTML='<p class="pdfi">Ricerca diretta non disponibile adesso. Usa i link agli archivi qui sotto: cercano già «'+esc(t)+'».</p>';return}
+ let L=s&&s.query?s.query.search.map(r=>r.title).filter(x=>!/^(Category|File|Help|IMSLP|User|Template):/i.test(x)):[];
+ if(solo){const f=L.filter(x=>x.toLowerCase().includes(sn.toLowerCase()));if(f.length)L=f}
+ PW=L;PH="risultati su IMSLP per «"+t+"»";
+ PC=cm&&cm.query?Object.values(cm.query.pages).filter(p=>p.imageinfo):[];PL=80;
+ if(!PW.length&&!PC.length){box.innerHTML='<p class="pdfi">Nessuno spartito trovato per «'+esc(t)+'». Prova a scrivere il titolo in un altro modo (anche in inglese o con il numero d\'opera), togli la spunta «solo di…», oppure usa i link qui sotto.</p>';return}
+ const old=$("#pdfq");if(old)old.value="";
+ pdfList();
+}
 function pdfList(){
  const f=($("#pdfq")?$("#pdfq").value:"").toLowerCase(),L=PW.filter(t=>!f||t.toLowerCase().includes(f));
  const old=$("#pdfq")?$("#pdfq").value:"";
- $("#pdfres").innerHTML=(PW.length?`<p class="pdfi"><b>${PW.length} opere su IMSLP</b> · tocca 📄 per vedere le edizioni e scaricare i PDF</p><input id="pdfq" placeholder="Filtra (es. op. 60, studi, sonata)" value="${esc(old)}"><ul class="pdfw">${L.slice(0,PL).map(t=>`<li><span>${esc(t.replace(/\s\([^()]*\)$/,""))}</span> <button class="pdfb" data-w="${esc(t)}">📄 Edizioni</button> <a class="pdfa" target="_blank" rel="noopener" href="https://imslp.org/wiki/${ue(t.replace(/ /g,"_"))}">Pagina</a><div class="pdff"></div></li>`).join("")}</ul>${L.length>PL?'<button class="op" id="pdfmore">Mostra altri</button>':""}`:"")
+ $("#pdfres").innerHTML=(PW.length?`<p class="pdfi"><b>${PW.length} ${PH}</b> · tocca 📄 per vedere le edizioni e scaricare i PDF</p><input id="pdfq" placeholder="Filtra (es. op. 60, studi, sonata)" value="${esc(old)}"><ul class="pdfw">${L.slice(0,PL).map(t=>`<li><span>${esc(t.replace(/\s\([^()]*\)$/,""))}</span> <button class="pdfb" data-w="${esc(t)}">📄 Edizioni</button> <a class="pdfa" target="_blank" rel="noopener" href="https://imslp.org/wiki/${ue(t.replace(/ /g,"_"))}">Pagina</a><div class="pdff"></div></li>`).join("")}</ul>${L.length>PL?'<button class="op" id="pdfmore">Mostra altri</button>':""}`:"")
  +(PC.length?`<p class="pdfi" style="margin-top:12px"><b>${PC.length} PDF su Wikimedia Commons</b></p><ul class="pdfw">${PC.map(p=>`<li><span>${esc(p.title.replace(/^File:/,"").replace(/\.pdf$/i,""))}</span> <a class="pdfb" target="_blank" rel="noopener" href="${p.imageinfo[0].url}">⬇ PDF</a></li>`).join("")}</ul>`:"");
  const q=$("#pdfq");if(q){q.oninput=()=>{PL=80;pdfList();const n=$("#pdfq");n.focus();n.setSelectionRange(n.value.length,n.value.length)}}
 }
@@ -826,9 +844,11 @@ async function pdfEd(t,box){
  let i=0;box.innerHTML=[...G].map(([el,fs])=>{i++;const rv=pdfCampo(el,/Editor|Arranger/i),pb=pdfCampo(el,/Publisher/i);
   return `<div class="pdfe"><b>${esc(rv?"Revisore: "+rv:"Edizione "+i)}</b>${pb?`<small> · ${esc(pb)}</small>`:""}<br>${fs.map(f=>`<a class="pdfa" target="_blank" rel="noopener" href="${f.u}">⬇ ${esc(f.l)}</a>`).join("")}</div>`}).join("");
 }
+document.addEventListener("keydown",e=>{if(e.target.id==="pdfbr"&&e.key==="Enter"){e.preventDefault();const b=$("#pdfbg");if(b)b.click()}});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-w]");if(b){const box=b.parentElement.querySelector(".pdff");box.innerHTML?box.innerHTML="":pdfEd(b.dataset.w,box);return}
  if(e.target.id==="pdfmore"){PL+=80;pdfList()}
- if(e.target.id==="pdfgo"){const c=C.find(x=>x[0]===e.target.dataset.n);if(c)pdfCerca(c)}});
+ if(e.target.id==="pdfbg"){const c=C.find(x=>x[0]===e.target.dataset.n);if(c)pdfBrano(c)}
+ if(e.target.id==="pdfgo"){const ln=document.querySelector(".pdfl");if(ln)ln.innerHTML=pdfLinks(e.target.dataset.n);const c=C.find(x=>x[0]===e.target.dataset.n);if(c)pdfCerca(c)}});
 </script>
 </body>
 </html>
